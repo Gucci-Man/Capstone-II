@@ -9,7 +9,7 @@ const express = require('express');
 const router = new express.Router();
 const db = require("../db");
 const Recipe = require("../models/recipeModel");
-const { ensureLoggedIn } = require("../middleware/auth");
+const { ensureLoggedIn, ensureCorrectUser } = require("../middleware/auth");
 const recipeSchema = require("../schemas/recipeCreate.json");
 const { ExpressError, BadRequestError } = require("../expressError");
 
@@ -20,7 +20,7 @@ const { ExpressError, BadRequestError } = require("../expressError");
  *  Authorization required: login
  */
 
-router.get('/create', ensureLoggedIn, async(req, res, next) => {
+router.post('/create', ensureLoggedIn, async(req, res, next) => {
     try {
         const validator = jsonschema.validate(req.body, recipeSchema);
         /* console.log(`user_id is ${JSON.stringify(req.user)}`); */
@@ -38,14 +38,35 @@ router.get('/create', ensureLoggedIn, async(req, res, next) => {
     }
 });
 
-/** GET /:recipe_id - request a previously created recipe from database.
+/** GET /:username - request all recipes associated with user only
+ *  
+ *  => { recipes }
+ * 
+ *  Authorization required: login
+ */
+
+router.get("/:username", ensureCorrectUser, async(req, res, next) => {
+    try {
+        let recipes = await Recipe.all(req.user.user_id)
+        if(recipes.length === 0) {
+            return res.json("No recipes found for user")
+        } else {
+            return res.json({ recipes });
+        }
+    } catch(e) {
+        console.log(`Retrieving recipes failed for user`);
+        return next(e);
+    }
+});
+
+/** GET /search/:recipe_id - request a previously created recipe from database.
  * 
  *  => { recipe }
  * 
  *  Authorization required: login
  */
 
-router.get('/:recipe_id', ensureLoggedIn, async(req, res, next) => {
+router.get("/search/:recipe_id", ensureLoggedIn, async(req, res, next) => {
     try {
         let recipe = await Recipe.get(req.params.recipe_id);
         return res.json({ recipe })
