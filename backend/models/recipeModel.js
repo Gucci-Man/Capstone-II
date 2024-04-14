@@ -67,6 +67,25 @@ class Recipe{
         }
         return results.rows
     }
+
+    /** 
+     * Delete given recipe from database; returns undefined
+     * 
+     */
+
+    static async remove(recipe_id, user_id) {
+        let result = await db.query(
+            `DELETE 
+            FROM recipes
+            WHERE recipe_id = $1
+            AND creator_id = $2
+            RETURNING recipe_id`,
+            [recipe_id, user_id]);
+
+        const recipe = result.rows[0];
+
+        if(!recipe) throw new ExpressError("Error attempting to delete recipe", 404);
+    }
 }
 
 module.exports = Recipe;

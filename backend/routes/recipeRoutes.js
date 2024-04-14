@@ -38,7 +38,7 @@ router.post('/create', ensureLoggedIn, async(req, res, next) => {
     }
 });
 
-/** GET /:username - request all recipes associated with user only
+/** GET /[username] - request all recipes associated with user only
  *  
  *  => { recipes }
  * 
@@ -59,7 +59,7 @@ router.get("/:username", ensureCorrectUser, async(req, res, next) => {
     }
 });
 
-/** GET /search/:recipe_id - request a previously created recipe from database.
+/** GET /search/[recipe_id] - request a previously created recipe from database.
  * 
  *  => { recipe }
  * 
@@ -73,6 +73,22 @@ router.get("/search/:recipe_id", ensureLoggedIn, async(req, res, next) => {
     } catch(e) {
         console.log("Get recipe route request has failed")
         return next(e);
+    }
+});
+
+/** DELETE /delete/[recipe_id] => { deleted: recipe_id }
+ *  
+ *  Only the user can delete their own recipe
+ * 
+ *  Authorization required: login
+ */
+
+router.delete("/delete/:recipe_id", async(req, res, next) => {
+    try {
+        await Recipe.remove(req.params.recipe_id, req.user.user_id);
+        return res.json({deleted: req.params.recipe_id});
+    } catch (err) {
+        return next(err);
     }
 });
 
