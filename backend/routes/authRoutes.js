@@ -25,9 +25,9 @@ router.post(`/register`, async (req, res, next) => {
             throw new BadRequestError(errs);
         }
         
-        // token payload includes username property
-        const { username } = await User.register(req.body)
-        let token = jwt.sign({username}, SECRET_KEY);
+        // token payload includes username and user_id property
+        const { username, user_id } = await User.register(req.body)
+        let token = jwt.sign({username, user_id}, SECRET_KEY);
         return res.json({token})
     } catch (e) {
         return next(e)

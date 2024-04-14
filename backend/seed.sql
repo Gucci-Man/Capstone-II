@@ -10,11 +10,13 @@ VALUES ('testuser',
         'stark@ironman.com',
         'iron man rules');
 
-INSERT INTO recipes (title, instructions, creator_id)
+INSERT INTO recipes (title, total_time, instructions, creator_id)
 VALUES ('test recipe',
+        '30 minutes',
         'test instructions',
         1),
        ('Iron Cake',
+        '1 hour',
         'Bake at 1000 degrees',
         2);
 

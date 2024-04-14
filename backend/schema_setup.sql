@@ -18,6 +18,7 @@ CREATE TABLE users (
 CREATE TABLE recipes (
     recipe_id SERIAL PRIMARY KEY,
     title TEXT NOT NULL,
+    total_time TEXT NOT NULL,
     instructions TEXT NOT NULL,
     creator_id INTEGER NOT NULL,
     FOREIGN KEY (creator_id) REFERENCES users(user_id) ON DELETE CASCADE

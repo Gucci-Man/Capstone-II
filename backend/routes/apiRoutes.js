@@ -11,9 +11,10 @@ const db = require("../db");
 const ChatGPT = require("../models/chatGPTAPI");
 const { ensureLoggedIn } = require("../middleware/auth");
 // create a schema for ChatGPT API
-const { ExpressError } = require("../expressError");
+const recipeSchema = require("../schemas/recipeCreate.json");
+const { ExpressError, BadRequestError } = require("../expressError");
 
-/** GET /request - send a recipe request. Logged in required
+/** GET /request - send a recipe request and add recipe to database. Logged in required
  * 
  *  => {response: { API response }}
  * 
@@ -22,8 +23,14 @@ const { ExpressError } = require("../expressError");
 
 router.get('/request', ensureLoggedIn, async(req, res, next) => {
     try {
-        let prompt = "Hello, how are you?"
-        let response = await ChatGPT.callChatGPT(prompt);
+        const validator = jsonschema.validate(req.body, recipeSchema);
+        /* console.log(`user_id is ${JSON.stringify(req.user)}`); */
+        if (!validator.valid) {
+            const errs = validator.errors.map(e => e.stack);
+            throw new BadRequestError(errs);
+        }
+
+        let response = await ChatGPT.callChatGPT(req.body, req.user.user_id);
         return res.json({ response })
     } catch (e) {
         console.log("ChatGPT route request has failed")

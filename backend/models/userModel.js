@@ -36,7 +36,7 @@ class User {
         const results = await db.query(
             `INSERT INTO users (username, password, first_name, last_name, email)
             VALUES ($1, $2, $3, $4, $5)
-            RETURNING username, password, first_name, last_name, email`,
+            RETURNING user_id, username, password, first_name, last_name, email`,
             [username, hashedPassword, firstName, lastName, email]);
         console.log(`results is ${JSON.stringify(results.rows[0])}`);
         return results.rows[0];
@@ -86,7 +86,7 @@ class User {
 
     static async get(username) {
         const results = await db.query(
-            `SELECT username, first_name, last_name, email
+            `SELECT user_id, username, first_name, last_name, email
             FROM users
             WHERE username = $1`, [username]);
 

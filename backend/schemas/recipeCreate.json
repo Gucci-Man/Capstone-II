@@ -1,0 +1,56 @@
+{
+    "$schema": "http://json-schema.org/draft/2019-09/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "default": {},
+    "title": "Root Schema",
+    "required": [ 
+      "ingredient_1" 
+    ], 
+    "properties": {
+      "ingredient_1": {
+        "type": "string",
+        "default": "",
+        "title": "The ingredient_1 Schema",
+        "examples": [
+          "egg"
+        ]
+      },
+      "ingredient_2": { 
+        "type": "string",
+        "default": "",
+        "title": "The ingredient_2 Schema",
+        "examples": [
+          "chicken"
+        ]
+      },
+      "ingredient_3": { 
+        "type": "string",
+        "default": "",
+        "title": "The ingredient_3 Schema",
+        "examples": [
+          "rice"
+        ]
+      },
+      "ingredient_4": { 
+        "type": "string",
+        "default": "",
+        "title": "The ingredient_4 Schema",
+        "examples": [
+          "spinach"
+        ]
+      },
+      "ingredient_5": { 
+        "type": "string",
+        "default": "",
+        "title": "The ingredient_5 Schema",
+        "examples": [
+          "onion"
+        ]
+      }
+    },
+    "examples": [{
+      "ingredient_1": "egg" 
+    }]
+  }
+  
