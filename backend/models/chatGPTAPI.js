@@ -11,8 +11,14 @@ const { ExpressError, NotFoundError, BadRequestError, UnauthorizedError }= requi
 const openai = new OpenAI({ apiKey: CHATGPT_KEY });
 
 class ChatGPT {
-    static async callChatGPT(ingredients, user_id) {
+
+    /**
+     * Retrieve recipe from ChatGPT API -- returns 
+     * {title, total_time, instructions}
+     */
+    static async callChatGPT(ingredients) {
         try {
+            // Convert ingredients JSON obj to a string
             const recipeArr = Object.keys(ingredients);
             const prompt = recipeArr.join(", ");
             const response = await openai.chat.completions.create({
@@ -32,18 +38,11 @@ class ChatGPT {
             // convert response to JSON and check if valid
             const recipeObject = JSON.parse(response.choices[0].message.content);
             if (!recipeObject) throw new BadRequestError("ChatGPT response did not contain valid JSON");
-            console.log(recipeObject);
+            /* console.log(recipeObject); */
 
-            // Save recipe to database
-            const results = await db.query(
-                `INSERT INTO recipes (title, total_time, instructions, creator_id)
-                VALUES ($1, $2, $3, $4)
-                RETURNING recipe_id, title, total_time, instructions, creator_id`,
-                [recipeObject.title, recipeObject.total_time, recipeObject.instructions, user_id]
-            )
-            console.log(`recipe results is ${JSON.stringify(results.rows[0])}`);
+            /* console.log(`recipe results is ${JSON.stringify(results.rows[0])}`); */
 
-            return response.choices[0].message.content;
+            return recipeObject;
         } catch (err) {
             console.log("Error calling ChatGPT API")
             throw new BadRequestError("ChatGPT API request failed");

@@ -9,6 +9,7 @@ const express = require('express');
 const router = new express.Router();
 const db = require("../db");
 const ChatGPT = require("../models/chatGPTAPI");
+const Recipe = require("../models/recipeModel");
 const { ensureLoggedIn } = require("../middleware/auth");
 // create a schema for ChatGPT API
 const recipeSchema = require("../schemas/recipeCreate.json");
@@ -30,10 +31,11 @@ router.get('/request', ensureLoggedIn, async(req, res, next) => {
             throw new BadRequestError(errs);
         }
 
-        let response = await ChatGPT.callChatGPT(req.body, req.user.user_id);
-        return res.json({ response })
+        /* let recipe = await ChatGPT.callChatGPT(req.body, req.user.user_id); */
+        let recipe = await Recipe.add(req.body,req.user.user_id)
+        return res.json({ recipe })
     } catch (e) {
-        console.log("ChatGPT route request has failed")
+        console.log("Add recipe route request has failed")
         return next(e);
     }
 });
