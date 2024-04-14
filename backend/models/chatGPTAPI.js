@@ -3,11 +3,7 @@
  */
 const { CHATGPT_KEY } = require("../config");
 const { OpenAI } = require('openai');
-const axios = require('axios');
-const db = require("../db");
-
 const { ExpressError, NotFoundError, BadRequestError, UnauthorizedError }= require("../expressError");
-
 const openai = new OpenAI({ apiKey: CHATGPT_KEY });
 
 class ChatGPT {

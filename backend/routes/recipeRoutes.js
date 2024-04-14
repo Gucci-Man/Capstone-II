@@ -8,21 +8,19 @@ const jsonschema = require("jsonschema");
 const express = require('express');
 const router = new express.Router();
 const db = require("../db");
-const ChatGPT = require("../models/chatGPTAPI");
 const Recipe = require("../models/recipeModel");
 const { ensureLoggedIn } = require("../middleware/auth");
-// create a schema for ChatGPT API
 const recipeSchema = require("../schemas/recipeCreate.json");
 const { ExpressError, BadRequestError } = require("../expressError");
 
 /** GET /request - send a recipe request and add recipe to database. Logged in required
  * 
- *  => {response: { API response }}
+ *  => { recipe }
  * 
  *  Authorization required: login
  */
 
-router.get('/request', ensureLoggedIn, async(req, res, next) => {
+router.get('/create', ensureLoggedIn, async(req, res, next) => {
     try {
         const validator = jsonschema.validate(req.body, recipeSchema);
         /* console.log(`user_id is ${JSON.stringify(req.user)}`); */
@@ -36,6 +34,23 @@ router.get('/request', ensureLoggedIn, async(req, res, next) => {
         return res.json({ recipe })
     } catch (e) {
         console.log("Add recipe route request has failed")
+        return next(e);
+    }
+});
+
+/** GET /:recipe_id - request a previously created recipe from database.
+ * 
+ *  => { recipe }
+ * 
+ *  Authorization required: login
+ */
+
+router.get('/:recipe_id', ensureLoggedIn, async(req, res, next) => {
+    try {
+        let recipe = await Recipe.get(req.params.recipe_id);
+        return res.json({ recipe })
+    } catch(e) {
+        console.log("Get recipe route request has failed")
         return next(e);
     }
 });

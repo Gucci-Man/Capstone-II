@@ -26,11 +26,11 @@ app.use(authenticateJWT);
 
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require(`./routes/authRoutes`);
-const apiRoutes = require(`./routes/apiRoutes`);
+const recipeRoutes = require(`./routes/recipeRoutes`);
 
 app.use('/users', userRoutes);
 app.use(`/auth`, authRoutes);
-app.use(`/recipes`, apiRoutes);
+app.use(`/recipes`, recipeRoutes);
 
 /** 404 handler */
 

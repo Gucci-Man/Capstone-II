@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { SECRET_KEY } = require("../config");
-const ExpressError = require("../expressError");
+const { ExpressError }= require("../expressError");
 
 /** Middleware: Auth JWT token, add auth'd user (if any) to req. */
 function authenticateJWT(req, res , next) {
