@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { SECRET_KEY } = require("../config");
-const { ExpressError }= require("../expressError");
+const { ExpressError, UnauthorizedError }= require("../expressError");
 
 /** Middleware: Auth JWT token, add auth'd user (if any) to req. */
 function authenticateJWT(req, res , next) {
@@ -11,11 +11,12 @@ function authenticateJWT(req, res , next) {
             return next(); // Token not found, but don't throw an error
         }
         const token = authHeader.split(' ')[1]; // Extract token after "Bearer "
+       
 
         // payload should have included username property
         const payload = jwt.verify(token, SECRET_KEY);
         /* console.log(`INSIDE authenticateJWT, payload is ${JSON.stringify(payload)}`); */
-        // add payload on to req itself. If req.user exist, then token is verified.
+        // add payload on to req.user. If req..user exist, then token is verified.
         req.user = payload;
         return next();
     } catch (e) {
@@ -27,7 +28,7 @@ function authenticateJWT(req, res , next) {
 /** Middleware: Require user is authenticated */
 function ensureLoggedIn(req, res, next) {
     if (!req.user) {
-        const e = new ExpressError("Unauthorized", 401);
+        const e = new UnauthorizedError("Unauthorized");
         return next(e)
     } else {
         return next();
@@ -42,11 +43,13 @@ function ensureCorrectUser(req, res, next) {
         if (req.user.username === req.params.username) {
             return next();
         } else {
-            return next({ status: 401, message: "Unauthorized" });
+            const e = new UnauthorizedError("Unauthorized");
+            return next(e);
         }
     } catch (err) {
         // Errors would happen here if we made a request and req.user is undefined
-        return next({ status: 401, message: "Unauthorized" });
+        const e = new UnauthorizedError("Unauthorized");
+        return next(e);
     }
 }
 // end

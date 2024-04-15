@@ -8,7 +8,7 @@ const DB = (process.env.NODE_ENV === "test")
     ? "foodie_fit_test"
     : "foodie_fit";
 
-const SECRET_KEY = process.env.SECRET_KEY 
+const SECRET_KEY = process.env.SECRET_KEY || "super-secret"
 
 const BCRYPT_WORK_FACTOR = 12;
 
