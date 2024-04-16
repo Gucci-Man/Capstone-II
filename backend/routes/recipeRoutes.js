@@ -20,7 +20,7 @@ const { ExpressError, BadRequestError } = require("../expressError");
  *  Authorization required: login
  */
 
-router.post('/create', ensureLoggedIn, async(req, res, next) => {
+router.post('/', ensureLoggedIn, async(req, res, next) => {
     try {
         const validator = jsonschema.validate(req.body, recipeSchema);
         /* console.log(`user_id is ${JSON.stringify(req.user)}`); */
@@ -38,16 +38,16 @@ router.post('/create', ensureLoggedIn, async(req, res, next) => {
     }
 });
 
-/** GET /[username] - request all recipes associated with user only
+/** GET user/[username] - request all recipes associated with user only
  *  
  *  => { recipes }
  * 
  *  Authorization required: login
  */
 
-router.get("/:username", ensureCorrectUser, async(req, res, next) => {
+router.get("/user/:username", ensureCorrectUser, async(req, res, next) => {
     try {
-        let recipes = await Recipe.all(req.user.user_id)
+        let recipes = await Recipe.user_all(req.user.user_id)
         if(recipes.length === 0) {
             return res.json("No recipes found for user")
         } else {
@@ -59,14 +59,28 @@ router.get("/:username", ensureCorrectUser, async(req, res, next) => {
     }
 });
 
-/** GET /search/[recipe_id] - request a previously created recipe from database.
+/** GET / - get a list of all recipes
+ * 
+ *  => { recipes: [{ recipe_id, title, total_time, instructions },...] }
+ */
+
+router.get(`/`, ensureLoggedIn, async(req, res, next) => {
+    try {
+        let recipes = await Recipe.all();
+        return res.json({ recipes })
+    } catch (e) {
+        return next(e);
+    }
+});
+
+/** GET /[recipe_id] - request a previously created recipe from database.
  * 
  *  => { recipe }
  * 
  *  Authorization required: login
  */
 
-router.get("/search/:recipe_id", ensureLoggedIn, async(req, res, next) => {
+router.get("/:recipe_id", ensureLoggedIn, async(req, res, next) => {
     try {
         let recipe = await Recipe.get(req.params.recipe_id);
         return res.json({ recipe })
@@ -76,14 +90,14 @@ router.get("/search/:recipe_id", ensureLoggedIn, async(req, res, next) => {
     }
 });
 
-/** DELETE /delete/[recipe_id] => { deleted: recipe_id }
+/** DELETE /[recipe_id] => { deleted: recipe_id }
  *  
  *  Only the user can delete their own recipe
  * 
  *  Authorization required: login
  */
 
-router.delete("/delete/:recipe_id", async(req, res, next) => {
+router.delete("/:recipe_id", async(req, res, next) => {
     try {
         await Recipe.remove(req.params.recipe_id, req.user.user_id);
         return res.json({deleted: req.params.recipe_id});
@@ -91,5 +105,13 @@ router.delete("/delete/:recipe_id", async(req, res, next) => {
         return next(err);
     }
 });
+
+// --------- TODO EXTRA --------------
+/** PUT /recipe_id
+ *  
+ *  Only the user can update recipe
+ * 
+ *  Authorization required: login
+ */
 
 module.exports = router;

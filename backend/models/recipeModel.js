@@ -2,7 +2,7 @@
  *  Model for recipes
  */
 
-const ChatGPT = require("../models/chatGPTAPI");
+const { callChatGPT } = require("../chatGPTAPI");
 const db = require("../db");
 const { ExpressError, NotFoundError, BadRequestError, UnauthorizedError }= require("../expressError");
 
@@ -11,12 +11,14 @@ class Recipe{
     /** Add: Retrieve recipe from ChatGPT and add to recipe database
      * 
      *  returns { recipe_id, title, total_time, instructions, creator_id }
+     * 
+     *  !!!! TODO: Add ingredients property !!!!!!
      */
 
     static async add(ingredients, user_id) {
 
         // retrieve recipe from ChatGPT API
-        let recipeObj = await ChatGPT.callChatGPT(ingredients);
+        let recipeObj = await callChatGPT(ingredients);
         if(!recipeObj) throw new BadRequestError("Request to ChatGPT API failed");
 
         // save recipe to database
@@ -49,12 +51,26 @@ class Recipe{
         return results.rows[0];
     }
 
-    /** All: Retrieve all recipes created by the user only
+    /** All: Retrieve all recipes 
+     * 
+     *  returns [{recipe_id, title, total_time, instructions, creator_id},...]
+     */
+
+    static async all() {
+        const results = await db.query(`SELECT recipe_id,title, total_time, instructions 
+                                        FROM recipes`);
+        if (results.rows.length === 0) {
+                throw new ExpressError("No recipes found", 404)
+            }
+        return results.rows
+    }
+
+    /** User_all: Retrieve all recipes created by the user only
      *  
      *  returns [{recipe_id, title, total_time, instructions},...]
      */
 
-    static async all(user_id) {
+    static async user_all(user_id) {
         const results = await db.query(
             `SELECT recipe_id, title, total_time, instructions 
             FROM recipes
@@ -86,6 +102,11 @@ class Recipe{
 
         if(!recipe) throw new ExpressError("Error attempting to delete recipe", 404);
     }
+
+    /** !!! TODO: Add update method !!!
+     * 
+     * 
+     */
 }
 
 module.exports = Recipe;
