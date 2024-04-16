@@ -1,6 +1,7 @@
 /**
- * Model for ChatGPT API
+ *  method to call ChatGPT API
  */
+
 const { CHATGPT_KEY } = require("./config");
 const { OpenAI } = require('openai');
 const { ExpressError, NotFoundError, BadRequestError, UnauthorizedError }= require("./expressError");
