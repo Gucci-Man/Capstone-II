@@ -13,7 +13,7 @@ const openai = new OpenAI({ apiKey: CHATGPT_KEY });
      */
 async function callChatGPT(ingredients) {
     try {
-        // Convert ingredients JSON obj to a string
+        // Convert ingredients JSON obj to a string as "prompt" then send to openai
         const recipeArr = Object.keys(ingredients);
         const prompt = recipeArr.join(", ");
         const response = await openai.chat.completions.create({
@@ -32,7 +32,9 @@ async function callChatGPT(ingredients) {
         });
         // convert response to JSON and check if valid
         const recipeObject = JSON.parse(response.choices[0].message.content);
-        if (!recipeObject) throw new BadRequestError("ChatGPT response did not contain valid JSON");
+        if (!recipeObject){
+            throw new BadRequestError("ChatGPT response did not contain valid JSON");
+        };
         /* console.log(recipeObject); */
 
         /* console.log(`recipe results is ${JSON.stringify(results.rows[0])}`); */

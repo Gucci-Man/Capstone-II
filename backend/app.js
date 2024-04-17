@@ -8,7 +8,7 @@
 const express = require("express");
 const cors = require("cors");
 const { authenticateJWT } = require("./middleware/auth")
-const { ExpressError }= require("./expressError")
+const { NotFoundError }= require("./expressError")
 
 const app = express();
 
@@ -35,7 +35,7 @@ app.use(`/recipes`, recipeRoutes);
 /** 404 handler */
 
 app.use(function(req, res, next) {
-    return new ExpressError("Not Found");
+    return next(new NotFoundError());
   });
 
 /** general error handler */
