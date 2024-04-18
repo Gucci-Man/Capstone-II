@@ -23,8 +23,19 @@ afterAll(commonAfterAll);
 
 describe("authenticate", function() {
     test("works", async function() {
-        console.log(`user_ids is ${user_ids}`);
-        console.log(`recipe_ids is ${recipe_ids}`);
+        const user = await User.authenticate("u1", "password1");
+        expect(user).toEqual(true);
+    });
+
+    test("unauth if no such user", async function() {
+        try {
+            await User.authenticate("nope", "password");
+            fail();
+        } catch (err) {
+            expect(err instanceof UnauthorizedError).toBeTruthy();
+        }
     });
 });
+
+/************************************** register */
 
