@@ -108,7 +108,7 @@ class User {
      * 
      *  Throws NotFoundError if not found
      * 
-     *  TODO: Add password validation
+     *  TODO: Add password validation on frontend
      * 
      */
 
@@ -120,8 +120,8 @@ class User {
         const {setCols, values } = sqlForPartialUpdate(
             data,
             {
-                first_name: "first_name",
-                last_name: "last_name",
+                firstName: "first_name",
+                lastName: "last_name",
                 email: "email",
             });
         const usernameVarIdx = "$" + (values.length + 1);
@@ -130,8 +130,8 @@ class User {
                          SET ${setCols}
                          WHERE username = ${usernameVarIdx}
                          RETURNING username,
-                         first_name,
-                         last_name,
+                         first_name AS "firstName",
+                         last_name AS "lastName",
                          email`;
         const result = await db.query(querySql, [...values, username]);
         const user = result.rows[0];
