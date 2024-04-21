@@ -20,15 +20,17 @@ class Recipe{
         // retrieve recipe from ChatGPT API
         let recipeObj = await callChatGPT(ingredients);
         if(!recipeObj) throw new BadRequestError("Request to ChatGPT API failed");
+        
 
         // save recipe to database
         const results = await db.query(
             `INSERT INTO recipes (title, total_time, instructions, creator_id)
             VALUES ($1, $2, $3, $4)
-            RETURNING recipe_id, title, total_time, instructions, creator_id`,
+            RETURNING id, title, total_time, instructions`,
             [recipeObj.title, recipeObj.total_time, recipeObj.instructions, user_id]);
 
         const recipe = results.rows[0];
+        console.log(recipe);
         if(!recipe) throw new ExpressError(`Recipe database error`, 404);
 
         return recipe
@@ -41,9 +43,9 @@ class Recipe{
 
     static async get(recipe_id) {
         const results = await db.query(
-            `SELECT recipe_id, title, total_time, instructions, creator_id
+            `SELECT id, title, total_time, instructions, creator_id
             FROM recipes
-            WHERE recipe_id = $1`, [recipe_id]);
+            WHERE id = $1`, [recipe_id]);
 
         if (!results.rows[0]) {
             throw new NotFoundError(`recipe was not found with recipe_id: ${recipe_id}`);
@@ -57,7 +59,7 @@ class Recipe{
      */
 
     static async all() {
-        const results = await db.query(`SELECT recipe_id,title, total_time, instructions 
+        const results = await db.query(`SELECT id, title, total_time, instructions 
                                         FROM recipes`);
         if (results.rows.length === 0) {
                 throw new ExpressError("No recipes found", 404)
@@ -72,7 +74,7 @@ class Recipe{
 
     static async user_all(user_id) {
         const results = await db.query(
-            `SELECT recipe_id, title, total_time, instructions 
+            `SELECT id, title, total_time, instructions 
             FROM recipes
             WHERE creator_id = $1`, [user_id]);
         
@@ -93,7 +95,7 @@ class Recipe{
         let result = await db.query(
             `DELETE 
             FROM recipes
-            WHERE recipe_id = $1
+            WHERE id = $1
             AND creator_id = $2
             RETURNING recipe_id`,
             [recipe_id, user_id]);

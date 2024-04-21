@@ -19,13 +19,13 @@ async function commonBeforeAll() {
         VALUES  ('u1', $1, 'U1F', 'U1L', 'u1@email.com'),
                 ('u2', $2, 'U2F', 'U2L', 'u2@email.com'),
                 ('u3', $3, 'U3F', 'U3L',  'u3@email.com')
-        RETURNING user_id`,
+        RETURNING id`,
         [
             await bcrypt.hash("password1", BCRYPT_WORK_FACTOR),
             await bcrypt.hash("password2", BCRYPT_WORK_FACTOR),
             await bcrypt.hash("password3", BCRYPT_WORK_FACTOR),
         ]);
-    user_ids.splice(0,0,...resultsUsers.rows.map(u => u.user_id));
+    user_ids.splice(0,0,...resultsUsers.rows.map(u => u.id));
 
     const resultsRecipes = await db.query(`
         INSERT INTO recipes(title,
@@ -36,7 +36,7 @@ async function commonBeforeAll() {
                ('r2', '2 hr', 'steps_2', $2),
                ('r3', '3 hr', 'steps_3', $3),
                ('r4', '4 hr', 'steps_4', $4)
-        RETURNING recipe_id`,
+        RETURNING id`,
         [
             user_ids[0],
             user_ids[1],

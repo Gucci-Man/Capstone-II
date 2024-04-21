@@ -36,9 +36,9 @@ class User {
         const results = await db.query(
             `INSERT INTO users (username, password, first_name, last_name, email)
             VALUES ($1, $2, $3, $4, $5)
-            RETURNING user_id, username, first_name AS "firstName", last_name AS "lastName", email`,
+            RETURNING id, username, first_name AS "firstName", last_name AS "lastName", email`,
             [username, hashedPassword, firstName, lastName, email]);
-        console.log(`results is ${JSON.stringify(results.rows[0])}`);
+        /* console.log(`results is ${JSON.stringify(results.rows[0])}`); */
         return results.rows[0];
     }
 

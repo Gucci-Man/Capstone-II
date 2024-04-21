@@ -29,7 +29,6 @@ router.post('/', ensureLoggedIn, async(req, res, next) => {
             throw new BadRequestError(errs);
         }
 
-        /* let recipe = await ChatGPT.callChatGPT(req.body, req.user.user_id); */
         let recipe = await Recipe.add(req.body,req.user.user_id)
         return res.json({ recipe })
     } catch (e) {
@@ -73,16 +72,16 @@ router.get(`/`, ensureLoggedIn, async(req, res, next) => {
     }
 });
 
-/** GET /[recipe_id] - request a previously created recipe from database.
+/** GET /[id] - request a previously created recipe from database.
  * 
  *  => { recipe }
  * 
  *  Authorization required: login
  */
 
-router.get("/:recipe_id", ensureLoggedIn, async(req, res, next) => {
+router.get("/:id", ensureLoggedIn, async(req, res, next) => {
     try {
-        let recipe = await Recipe.get(req.params.recipe_id);
+        let recipe = await Recipe.get(req.params.id);
         return res.json({ recipe })
     } catch(e) {
         console.log("Get recipe route request has failed")
@@ -90,17 +89,17 @@ router.get("/:recipe_id", ensureLoggedIn, async(req, res, next) => {
     }
 });
 
-/** DELETE /[recipe_id] => { deleted: recipe_id }
+/** DELETE /[id] => { deleted: recipe_id }
  *  
  *  Only the user can delete their own recipe
  * 
  *  Authorization required: login
  */
 
-router.delete("/:recipe_id", async(req, res, next) => {
+router.delete("/:id", async(req, res, next) => {
     try {
-        await Recipe.remove(req.params.recipe_id, req.user.user_id);
-        return res.json({deleted: req.params.recipe_id});
+        await Recipe.remove(req.params.id, req.user.id);
+        return res.json({deleted: req.params.id});
     } catch (err) {
         return next(err);
     }

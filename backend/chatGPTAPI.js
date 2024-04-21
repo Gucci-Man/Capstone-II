@@ -10,12 +10,16 @@ const openai = new OpenAI({ apiKey: CHATGPT_KEY });
     /**
      * Retrieve recipe from ChatGPT API -- returns 
      * {title, total_time, instructions}
+     * 
+     *  ingredients: {ingredient_1: value,...}
      */
 async function callChatGPT(ingredients) {
     try {
         // Convert ingredients JSON obj to a string as "prompt" then send to openai
-        const recipeArr = Object.keys(ingredients);
+        const recipeArr = Object.values(ingredients);
+        /* console.log(`recipeArr is ${recipeArr}`); */
         const prompt = recipeArr.join(", ");
+        /* console.log(`prompt is ${prompt}`); */
         const response = await openai.chat.completions.create({
             messages: [
                 {

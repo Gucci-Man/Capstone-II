@@ -15,7 +15,7 @@ const { BadRequestError } = require("../expressError");
 
 /** GET / - get list of users. Logged in required
  *
- * => {users: [{username, first_name, last_name, phone}, ...]}
+ * => {users: [{username, firstName, lastName, phone}, ...]}
  * 
  * Authorization required: login
  **/
@@ -31,7 +31,7 @@ router.get('/', ensureLoggedIn, async (req, res, next) => {
 
 /** GET /:username - get detail of user
  * 
- *  => {user: { username, first_name, last_name, email }}
+ *  => {users: { username, firstName, lastName, email }}
  * 
  *  Authorization required: login
  */
@@ -47,7 +47,7 @@ router.get("/:username", ensureCorrectUser, async function (req, res, next) {
 
 /** PATCH /[username] - Updates user's details
  * 
- *  => { user: { username, first_name, last_name, email }}
+ *  => { user: { username, firstName, lastName, email }}
  * 
  *  Data can include:
  *      { first_name, last_name, password, email }

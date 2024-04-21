@@ -62,7 +62,7 @@ describe("register", function() {
             ...newUser,
             password: "password",
         });
-        expect(user).toEqual({...newUser, user_id: expect.any(Number)});
+        expect(user).toEqual({...newUser, id: expect.any(Number)});
         const found = await db.query("SELECT * FROM users WHERE username = 'new'");
         /* console.log(found) */
         expect(found.rows.length).toEqual(1);
