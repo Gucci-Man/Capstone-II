@@ -123,4 +123,66 @@ describe("PATCH /users/:username", () => {
     });
   });
 
+  test("unauth for wrong user", async function () {
+    const u1Token = tokens["u1Token"];
+    const resp = await request(app)
+      .patch(`/users/u3`)
+      .send({
+        lastName: "New",
+      })
+      .set("authorization", `Bearer ${u1Token}`);
+    expect(resp.statusCode).toEqual(401);
+  })
+
+  test("unauth for anon", async function () {
+    const resp = await request(app)
+        .patch(`/users/u1`)
+        .send({
+          firstName: "New",
+        });
+    expect(resp.statusCode).toEqual(401);
+  });
+
+  test("unauth if no such user", async function () {
+    const u1Token = tokens["u1Token"];
+    const resp = await request(app)
+        .patch(`/users/nope`)
+        .send({
+          firstName: "Nope",
+        })
+        .set("authorization", `Bearer ${u1Token}`);
+    expect(resp.statusCode).toEqual(401);
+  });
+
+  test("bad request if invalid data", async function () {
+    const u1Token = tokens["u1Token"];
+    const resp = await request(app)
+        .patch(`/users/u1`)
+        .send({
+          firstName: 42,
+        })
+        .set("authorization", `Bearer ${u1Token}`);
+    expect(resp.statusCode).toEqual(400);
+  });
+
+  test("works: set new password", async function () {
+    const u1Token = tokens["u1Token"];
+    const resp = await request(app)
+        .patch(`/users/u1`)
+        .send({
+          password: "new-password",
+        })
+        .set("authorization", `Bearer ${u1Token}`);
+    expect(resp.body).toEqual({
+      user: {
+        username: "u1",
+        firstName: "U1F",
+        lastName: "U1L",
+        email: "user1@user.com",
+      },
+    });
+    const isSuccessful = await User.authenticate("u1", "new-password");
+    expect(isSuccessful).toBeTruthy();
+  });
+
 });
