@@ -77,4 +77,50 @@ describe("GET /users/:username", function() {
       },
     });
   });
+
+  test("unauth for wrong user", async function () {
+    const u1Token = tokens["u1Token"];
+    const resp = await request(app)
+      .get(`/users/u3`)
+      .set("authorization", `Bearer ${u1Token}`);
+    expect(resp.statusCode).toEqual(401);
+  });
+
+  test("unauth for anon", async function () {
+    const resp = await request(app)
+      .get(`/users/u1`);
+    expect(resp.statusCode).toEqual(401);
+  });
+
+  test("unauth if user not found", async function () {
+    const u1Token = tokens["u1Token"];
+    const resp = await request(app)
+      .get(`/users/nope`)
+      .set("authorization", `Bearer ${u1Token}`);
+    expect(resp.statusCode).toEqual(401);
+  });
+
+});
+
+/************************************** PATCH /users/:username */
+
+describe("PATCH /users/:username", () => {
+  test("works for users", async function () {
+    const u1Token = tokens["u1Token"];
+    const resp = await request(app)
+      .patch(`/users/u1`)
+      .send({
+        firstName: "New",
+      })
+      .set("authorization", `Bearer ${u1Token}`);
+    expect(resp.body).toEqual({ 
+      user: {
+        username: "u1",
+        firstName: "New",
+        lastName: "U1L",
+        email: "user1@user.com",
+      },
+    });
+  });
+
 });
