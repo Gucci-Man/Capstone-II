@@ -186,3 +186,37 @@ describe("PATCH /users/:username", () => {
   });
 
 });
+
+/************************************** DELETE /users/:username */
+
+describe("DELETE /users/:username", function () {
+  test("works for users", async function () {
+    const u1Token = tokens["u1Token"];
+    const resp = await request(app)
+        .delete(`/users/u1`)
+        .set("authorization", `Bearer ${u1Token}`);
+    expect(resp.body).toEqual({ deleted: "u1" });
+  });
+
+  test("unauth for wrong user", async function () {
+    const u1Token = tokens["u1Token"];
+    const resp = await request(app)
+        .delete(`/users/u2`)
+        .set("authorization", `Bearer ${u1Token}`);
+    expect(resp.statusCode).toEqual(401);
+  });
+
+  test("unauth for anon", async function () {
+    const resp = await request(app)
+        .delete(`/users/u1`);
+    expect(resp.statusCode).toEqual(401);
+  });
+
+  test("unauth if user missing", async function () {
+    const u1Token = tokens["u1Token"];
+    const resp = await request(app)
+        .delete(`/users/nope`)
+        .set("authorization", `Bearer ${u1Token}`);
+    expect(resp.statusCode).toEqual(401);
+  });
+});
