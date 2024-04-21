@@ -52,4 +52,29 @@ describe("GET /users", function () {
     });
   });
 
+  test("unauth for anon", async function () {
+    const resp = await request(app)
+      .get("/users");
+    expect(resp.statusCode).toEqual(401);
+  });
+});
+
+/************************************** GET /users/:username */
+
+describe("GET /users/:username", function() {
+  
+  test("works for users", async function () {
+    const u1Token = tokens["u1Token"];
+    const resp = await request(app)
+      .get("/users/u1")
+      .set("Authorization", `Bearer ${u1Token}`);
+    expect(resp.body).toEqual({
+      user: {
+        username: "u1",
+        firstName: "U1F",
+        lastName: "U1L",
+        email: "user1@user.com",
+      },
+    });
+  });
 });
