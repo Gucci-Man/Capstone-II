@@ -44,14 +44,16 @@ const LoginForm = () => {
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('username', username);
                 navigate('/home', {replace: true}); // Redirect to home 
-            };
+            } 
+
         } catch (err) {
         // debugging
             console.log(err)
 
             if (err.response && err.response.status == 401) {
                 //Specific handling for wrong username/password (display to user)
-                console.log("Invalid username or password");
+                alert('Invalid username or password');
+                setFormData(initialState);
             } else {
                 console.log("Login failed: ", err);
             };
