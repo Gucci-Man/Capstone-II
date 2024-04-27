@@ -7,6 +7,16 @@
 **To seed database:**
 psql < foodie_fit_db_setup.sql
 
+### Running the backend
+`npm run start` - Starts the backend in production mode
+
+`npm run dev` - Starts the backend in development mode
+
+`npm run test` - Runs tests
+
+### Running the frontend
+`npm run dev` - Starts the frontend in dev mode
+
 ## Project Layout
 
 1. **Backend API**: you'll need a backend server and API to act as an intermediary between your React app and the PostgreSQL database. Popular technologies for building this include:

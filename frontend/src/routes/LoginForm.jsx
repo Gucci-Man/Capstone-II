@@ -19,11 +19,9 @@ const LoginForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const { username, password } = formData;
-        /* alert(`Created user, ${username} w/ password ${password}`); */
-        /* setFormData(initialState); */
-
+    
         try {
-            console.log(`username is ${username} and password is ${password}`)
+            /* console.log(`username is ${username} and password is ${password}`) */
             const response = await axios.post('http://localhost:3000/auth/login', {
                 username,
                 password

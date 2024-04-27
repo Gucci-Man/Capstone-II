@@ -7,7 +7,8 @@ const WelcomePage = () => {
     return (
         <div>
             <h1>Welcome!</h1>
-            <LoginForm></LoginForm>
+            <LoginForm />
+            <p>Don't have an account? <Link to="/register">Register</Link></p>
         </div>
     );
 }

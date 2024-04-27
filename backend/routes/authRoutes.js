@@ -28,7 +28,7 @@ router.post(`/register`, async (req, res, next) => {
         // token payload includes username and user_id property
         const { username, id } = await User.register(req.body)
         let token = jwt.sign({username, id}, SECRET_KEY);
-        return res.json({token})
+        return res.status(201).json({token})
     } catch (e) {
         return next(e)
     }
@@ -43,7 +43,7 @@ router.post(`/login`, async(req, res, next) => {
             let token = jwt.sign({username}, SECRET_KEY);
             return res.json({token});
         } else {
-            throw new ExpressError("Invalid username/password", 400);
+            throw new ExpressError("Invalid username/password", 401);
         }
     } catch(e) {
         return next(e);
