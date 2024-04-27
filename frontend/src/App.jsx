@@ -5,11 +5,21 @@ import RouteList from './RouteList';
 
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    const checkLoggedIn = () => {
+      setToken(localStorage.getItem('token'));
+      setIsLoggedIn(token !== null);
+    }
+    checkLoggedIn();
+  }, []); // Empty dependency array: Execute only once on component mount
   return (
     <div>
       <BrowserRouter>
         <div>
-          <RouteList />
+          <RouteList token={token}/>
         </div>
       </BrowserRouter>
     </div>

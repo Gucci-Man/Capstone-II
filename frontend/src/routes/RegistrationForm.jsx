@@ -43,6 +43,10 @@ const handleSubmit = async (e) => {
 
         if (response.status === 201) {
             console.log('User registered!');
+
+            // Store token and username in localStorage if successful
+            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('username', username);
             navigate('/home'); // Redirect to home 
         }
     } catch (err) {

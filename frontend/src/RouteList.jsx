@@ -5,13 +5,14 @@ import RegistrationForm from './routes/RegistrationForm';
 import NotFound from './routes/NotFound';
 import Home from './routes/Home';
 
-const RouteList = () => {
+const RouteList = ({token}) => {
+    /* console.log(`Inside RouteList: ${token}`) */
     return(
         <Routes>
             <Route path="/" element={<WelcomePage />} />
             <Route path="/register" element={<RegistrationForm />} />
-            <Route path="*" element={<NotFound />} />
             <Route path="/home" element={<Home />} />
+            <Route path="*" element={<NotFound />} />
         </Routes>
     )
 };

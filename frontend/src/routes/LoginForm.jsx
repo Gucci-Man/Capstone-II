@@ -36,10 +36,11 @@ const LoginForm = () => {
             if (response.status === 200) {
 
                 // debugging
-                console.log(response.data.token);
+                /* console.log(response.data.token); */
 
-                // Store token in localStorage
+                // Store token and username in localStorage if successful
                 localStorage.setItem('token', response.data.token);
+                localStorage.setItem('username', username);
                 /* console.log(`localStorage token is ${localStorage.getItem('token')}`); */
 
                 navigate('/home'); // Redirect to home 
