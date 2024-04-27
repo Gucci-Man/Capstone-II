@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 function WelcomePage() {
     const initialState = {
@@ -15,12 +16,31 @@ function WelcomePage() {
         }));
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const { username, password } = formData;
-        alert(`Created user, ${username} w/ password ${password}`);
-        setFormData(initialState);
-    }
+        /* alert(`Created user, ${username} w/ password ${password}`); */
+        /* setFormData(initialState); */
+
+        // username: testuser
+        // password: test password
+
+        try {
+            console.log(`username is ${username} and password is ${password}`)
+            const response = await axios.post('http://localhost:3000/auth/login', {
+                username,
+                password
+            });
+
+            // Successful login
+            if (response.status === 200) {
+                console.log('Login!')
+            };
+        } catch (err) {
+            console.log(err)
+        }
+    };
+
     return (
         <div>
             <h1>This is the welcome page</h1>
