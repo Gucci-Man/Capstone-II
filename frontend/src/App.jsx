@@ -1,15 +1,16 @@
 import './App.css'
 import React, {useState, useEffect} from 'react';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import WelcomePage from "./routes/WelcomePage";
+import RouteList from './RouteList';
+
 
 function App() {
   return (
     <div>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<WelcomePage />} />
-        </Routes>
+        <div>
+          <RouteList />
+        </div>
       </BrowserRouter>
     </div>
   )
