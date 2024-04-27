@@ -9,7 +9,7 @@ const RouteList = ({token}) => {
     /* console.log(`Inside RouteList: ${token}`) */
     return(
         <Routes>
-            <Route path="/" element={<WelcomePage />} />
+            <Route path="/" element={<WelcomePage token={token}/>} />
             <Route path="/register" element={<RegistrationForm />} />
             <Route path="/home" element={<Home token={token}/>} />
             <Route path="*" element={<NotFound />} />

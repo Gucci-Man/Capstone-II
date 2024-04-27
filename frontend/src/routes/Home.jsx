@@ -10,19 +10,30 @@ const Home = ({token}) => {
     /* console.log(`Inside Home: ${token}`) */
 
     useEffect(() => {
+        
         // if token is not available, return to welcome page
-        if(!token) {
+        if(!token && !localStorage.getItem('token')) {
             navigate('/', {replace: true}); // prevent user from going to previous page
-            
         }
-
         const storedUsername = localStorage.getItem('username');
         setUsername(storedUsername);
-    }, []); // Ensure username is fetched only once on component mount
+    }, [token, navigate]); // Add token and navigate as dependencies
+
+    const handleLogout = () => {
+        // Clear token from localStorage
+        localStorage.removeItem('token');
+
+        // Clear username from localStorage
+        localStorage.removeItem('username');
+
+        // Redirect to the Welcome page
+        navigate('/', {replace: true});
+    };
 
     return (
         <div className="home-page">
             <h1>Welcome home {username}</h1>
+            <button onClick={handleLogout} className="btn btn-danger">Logout</button>
         </div>
     );
 };

@@ -1,9 +1,17 @@
-import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import React, { useEffect} from 'react';
+import { Link, useNavigate  } from 'react-router-dom';
 import LoginForm from './LoginForm';
 
-const WelcomePage = () => {
-// TODO: Set up links to register
+const WelcomePage = ({token}) => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        // if token is available, redirect to user homepage since user is already login
+        if(token && localStorage.getItem('token')) {
+            navigate('/home', {replace: true}); // prevent user from going to previous page
+        }
+    }, [token]); // 
+    
     return (
         <div>
             <h1>Welcome!</h1>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from 'axios';
 
@@ -15,8 +15,15 @@ const RegistrationForm = () => {
 
 // error display
 const [errorMessages, setErrorMessages] = useState({}); 
-
 const navigate = useNavigate();
+
+useEffect(() => {
+    // Check if user is already registered
+    // If so, prevent user from going back
+    if (localStorage.getItem('token')) {
+        navigate('/home', { replace: true });
+    }
+}, [navigate]); // Add navigate as dependencies
 
 const handleChange = (e) => {
     const {name, value} = e.target;
@@ -28,6 +35,7 @@ const handleChange = (e) => {
 
 const handleSubmit = async (e) => {
     e.preventDefault();
+    const { username } = formData;
 
     // Basic validation (add more robust validation)
     const errors = {};
@@ -38,16 +46,14 @@ const handleSubmit = async (e) => {
     }
 
     try {
-        console.log(formData);
         const response = await axios.post(`${baseURL}/auth/register`, formData);
-
         if (response.status === 201) {
             console.log('User registered!');
 
             // Store token and username in localStorage if successful
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('username', username);
-            navigate('/home'); // Redirect to home 
+            navigate('/home', { replace: true }); // Redirect to home 
         }
     } catch (err) {
         console.log('Registration Error:', err);

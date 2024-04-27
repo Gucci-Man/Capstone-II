@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from 'axios';
 
@@ -10,8 +10,14 @@ const LoginForm = () => {
         password: ""
     }
     const [formData, setFormData] = useState(initialState)
-
     const navigate = useNavigate();
+
+    useEffect(() => {
+        // Check if user is already authenticated (logged in)
+        if (localStorage.getItem('token')) {
+            navigate('/home', { replace: true });
+        }
+    }, [navigate]); // Add navigate as dependencies
 
     const handleChange = e => {
         const {name, value} = e.target;
@@ -26,7 +32,6 @@ const LoginForm = () => {
         const { username, password } = formData;
     
         try {
-            /* console.log(`username is ${username} and password is ${password}`) */
             const response = await axios.post(`${baseURL}/auth/login`, {
                 username,
                 password
@@ -35,15 +40,10 @@ const LoginForm = () => {
             // Successful login
             if (response.status === 200) {
 
-                // debugging
-                /* console.log(response.data.token); */
-
                 // Store token and username in localStorage if successful
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('username', username);
-                /* console.log(`localStorage token is ${localStorage.getItem('token')}`); */
-
-                navigate('/home'); // Redirect to home 
+                navigate('/home', {replace: true}); // Redirect to home 
             };
         } catch (err) {
         // debugging

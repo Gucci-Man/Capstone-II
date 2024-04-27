@@ -1,6 +1,6 @@
 import './App.css'
 import React, {useState, useEffect} from 'react';
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 import RouteList from './RouteList';
 
 
@@ -14,7 +14,7 @@ function App() {
       setIsLoggedIn(token !== null);
     }
     checkLoggedIn();
-  }, []); // Empty dependency array: Execute only once on component mount
+  }, [token]); // Execute only if token is changed
   return (
     <div>
       <BrowserRouter>
