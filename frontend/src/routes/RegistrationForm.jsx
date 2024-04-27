@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import.meta.env.VITE_BASE_URL;
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 
@@ -39,11 +38,12 @@ const handleSubmit = async (e) => {
     }
 
     try {
+        console.log(formData);
         const response = await axios.post(`${baseURL}/auth/register`, formData);
 
         if (response.status === 201) {
             console.log('User registered!');
-            navigate('/'); // Redirect to home 
+            navigate('/home'); // Redirect to home 
         }
     } catch (err) {
         console.log('Registration Error:', err);
@@ -53,7 +53,7 @@ const handleSubmit = async (e) => {
 
     return (
         <div>
-            <h1>Regristration Form</h1>
+            <h1>Registration Form</h1>
             <form onSubmit={handleSubmit}>
             {errorMessages.username && <p className="error">{errorMessages.username}</p>}
             <div>
@@ -72,8 +72,8 @@ const handleSubmit = async (e) => {
                 <input 
                     type="text"
                     id="first_name"
-                    name="first_name"
-                    value={formData.first_name}
+                    name="firstName"
+                    value={formData.firstName}
                     onChange={handleChange}
                     required
                 />
@@ -83,8 +83,8 @@ const handleSubmit = async (e) => {
                 <input 
                     type="text"
                     id="last_name"
-                    name="last_name"
-                    value={formData.last_name}
+                    name="lastName"
+                    value={formData.lastName}
                     onChange={handleChange}
                     required
                 />

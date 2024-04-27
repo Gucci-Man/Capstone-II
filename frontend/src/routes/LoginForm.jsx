@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import.meta.env.VITE_BASE_URL;
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 
@@ -11,6 +10,9 @@ const LoginForm = () => {
         password: ""
     }
     const [formData, setFormData] = useState(initialState)
+
+    const navigate = useNavigate();
+
     const handleChange = e => {
         const {name, value} = e.target;
         setFormData(data => ({
@@ -39,6 +41,8 @@ const LoginForm = () => {
                 // Store token in localStorage
                 localStorage.setItem('token', response.data.token);
                 /* console.log(`localStorage token is ${localStorage.getItem('token')}`); */
+
+                navigate('/home'); // Redirect to home 
             };
         } catch (err) {
         // debugging
