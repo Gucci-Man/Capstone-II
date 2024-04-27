@@ -11,7 +11,7 @@ const RouteList = ({token}) => {
         <Routes>
             <Route path="/" element={<WelcomePage />} />
             <Route path="/register" element={<RegistrationForm />} />
-            <Route path="/home" element={<Home />} />
+            <Route path="/home" element={<Home token={token}/>} />
             <Route path="*" element={<NotFound />} />
         </Routes>
     )
