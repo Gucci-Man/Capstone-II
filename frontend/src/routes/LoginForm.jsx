@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import.meta.env.VITE_BASE_URL;
+
+const baseURL = import.meta.env.VITE_BASE_URL;
 
 const LoginForm = () => {
     const initialState = {
@@ -22,7 +25,7 @@ const LoginForm = () => {
     
         try {
             /* console.log(`username is ${username} and password is ${password}`) */
-            const response = await axios.post('http://localhost:3000/auth/login', {
+            const response = await axios.post(`${baseURL}/auth/login`, {
                 username,
                 password
             });
@@ -63,7 +66,6 @@ const LoginForm = () => {
                     value={formData.username}
                     onChange={handleChange}
                 />
-
                 <label htmlFor="password">Password</label>
                 <input 
                     id="password"
@@ -73,7 +75,7 @@ const LoginForm = () => {
                     value={formData.password}
                     onChange={handleChange}
                 />
-                <button>Login</button>
+                <button type="submit" className="btn btn-primary">Login</button>
             </form>
         </div>
     );

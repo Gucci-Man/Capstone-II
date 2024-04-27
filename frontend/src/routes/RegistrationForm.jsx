@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import.meta.env.VITE_BASE_URL;
+
+const baseURL = import.meta.env.VITE_BASE_URL;
 
 const RegistrationForm = () => {
     const [formData, setFormData] = useState({
@@ -36,7 +39,7 @@ const handleSubmit = async (e) => {
     }
 
     try {
-        const response = await axios.post('localhost:3000/auth/register', formData);
+        const response = await axios.post(`${baseURL}/auth/register`, formData);
 
         if (response.status === 201) {
             console.log('User registered!');
@@ -103,7 +106,7 @@ const handleSubmit = async (e) => {
                     onChange={handleChange}
                 />
             </div>
-            <button type="submit">Register</button>
+            <button type="submit" className="btn btn-primary">Register</button>
         </form>
         </div>
         
