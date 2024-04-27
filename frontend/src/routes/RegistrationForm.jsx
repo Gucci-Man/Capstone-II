@@ -64,6 +64,7 @@ const handleSubmit = async (e) => {
                     name="username"
                     value={formData.username}
                     onChange={handleChange}
+                    required
                 />
             </div>
             <div>
@@ -74,6 +75,7 @@ const handleSubmit = async (e) => {
                     name="first_name"
                     value={formData.first_name}
                     onChange={handleChange}
+                    required
                 />
             </div>
             <div>
@@ -84,6 +86,7 @@ const handleSubmit = async (e) => {
                     name="last_name"
                     value={formData.last_name}
                     onChange={handleChange}
+                    required
                 />
             </div>
             <div>
@@ -94,6 +97,7 @@ const handleSubmit = async (e) => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
+                    required
                 />
             </div>
             <div>
@@ -104,6 +108,7 @@ const handleSubmit = async (e) => {
                     name="password"
                     value={formData.password}
                     onChange={handleChange}
+                    required
                 />
             </div>
             <button type="submit" className="btn btn-primary">Register</button>

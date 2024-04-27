@@ -65,6 +65,7 @@ const LoginForm = () => {
                     placeholder="username"
                     value={formData.username}
                     onChange={handleChange}
+                    required
                 />
                 <label htmlFor="password">Password</label>
                 <input 
@@ -74,6 +75,7 @@ const LoginForm = () => {
                     placeholder="password"
                     value={formData.password}
                     onChange={handleChange}
+                    required
                 />
                 <button type="submit" className="btn btn-primary">Login</button>
             </form>
