@@ -14,7 +14,7 @@ const WelcomePage = ({token, setIsLoggedIn}) => {
     
     return (
         <div>
-            <h1>Welcome!</h1>
+            <h1>Welcome to FoodieFit!</h1>
             <LoginForm setIsLoggedIn={setIsLoggedIn}/>
             <p>Don't have an account? <Link to="/register">Register</Link></p>
         </div>

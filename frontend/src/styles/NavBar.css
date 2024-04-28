@@ -6,6 +6,12 @@ nav {
     display: flex;          
     align-items: center;    
     justify-content: space-between;  
+
+    /* Key CSS for positioning */
+    position: fixed;      /* Make it stick to the top */
+    top: 0;               /* Position at the very top */
+    left: 0;              /* Position at the very left */
+    width: 100%;          /* Span across the full page width */
   }
   
   nav a {

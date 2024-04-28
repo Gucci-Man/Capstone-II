@@ -24,7 +24,7 @@ afterAll(commonAfterAll);
 describe("authenticate", function() {
     test("works", async function() {
         const user = await User.authenticate("u1", "password1");
-        expect(user).toEqual(true);
+        expect(user).toBeTruthy();
     });
 
     test("unauth if no such user", async function() {

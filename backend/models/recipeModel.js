@@ -30,7 +30,7 @@ class Recipe{
             [recipeObj.title, recipeObj.total_time, recipeObj.instructions, user_id]);
 
         const recipe = results.rows[0];
-        console.log(recipe);
+        /* console.log(recipe); */
         if(!recipe) throw new ExpressError(`Recipe database error`, 404);
 
         return recipe

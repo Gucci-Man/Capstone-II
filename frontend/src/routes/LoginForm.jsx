@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import '../styles/LoginForm.css'
 import axios from 'axios';
 
 const baseURL = import.meta.env.VITE_BASE_URL;
@@ -39,6 +40,8 @@ const LoginForm = ({ setIsLoggedIn }) => {
 
             // Successful login
             if (response.status === 200) {
+
+                console.log(response.data)
 
                 // Store token and username in localStorage if successful
                 localStorage.setItem('token', response.data.token);

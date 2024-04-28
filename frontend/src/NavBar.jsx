@@ -19,6 +19,7 @@ const NavBar = ({ username, setIsLoggedIn }) => {
         navigate('/', {replace: true});
     }
     
+    // TODO: Add link for user recipes
     return (
         <nav>
             <div className="navbar-left">

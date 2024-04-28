@@ -49,14 +49,19 @@ class User {
             throw new ExpressError("Username and password required", 400);
         }
         const results = await db.query(
-            `SELECT username, password
+            `SELECT username, password, id
             FROM users
             WHERE username = $1`, [username]);
 
         const user = results.rows[0];
         if(user) {
             const user_valid = await bcrypt.compare(password, user.password);
-            return user_valid;
+            if(user_valid) {
+                return user.id; // if user is valid, return user id
+            } else {
+                return false;
+            }
+            
         }
         throw new UnauthorizedError("Invalid username/password");
     }

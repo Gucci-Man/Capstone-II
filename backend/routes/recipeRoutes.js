@@ -21,16 +21,16 @@ const { ExpressError, BadRequestError } = require("../expressError");
  */
 
 router.post('/', ensureLoggedIn, async(req, res, next) => {
-    try {
+    try {        
         const validator = jsonschema.validate(req.body, recipeSchema);
         /* console.log(`user_id is ${JSON.stringify(req.user)}`); */
         if (!validator.valid) {
             const errs = validator.errors.map(e => e.stack);
             throw new BadRequestError(errs);
         }
-
-        let recipe = await Recipe.add(req.body,req.user.user_id)
-        return res.json({ recipe })
+        
+        let recipe = await Recipe.add(req.body,req.user.id)
+        return res.status(201).json({ recipe })
     } catch (e) {
         console.log("Add recipe route request has failed")
         return next(e);

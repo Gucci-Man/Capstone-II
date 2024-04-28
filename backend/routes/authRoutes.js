@@ -39,8 +39,10 @@ router.post(`/register`, async (req, res, next) => {
 router.post(`/login`, async(req, res, next) => {
     try {
         let {username, password} = req.body;
-        if (await User.authenticate(username, password)) {
-            let token = jwt.sign({username}, SECRET_KEY);
+        // check if user is valid, if so it will return the user_id
+        const user_id = await User.authenticate(username, password);
+        if (user_id) {
+            let token = jwt.sign({username, id: user_id}, SECRET_KEY); // payload includes the username and user id for adding recipes
             return res.json({token});
         } else {
             throw new ExpressError("Invalid username/password", 401);
