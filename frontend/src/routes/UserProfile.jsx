@@ -39,12 +39,14 @@ const UserProfile = ({token}) => {
         fetchData();
     }, [name]);
 
+    // TODO: Style this better
     return (
         <div>
             {isLoading && <div>Loading user data...</div>}
             {error && <div>Error fetching data: {error.message}</div>}
             {userData && (
                 <div>
+                    <h1>User Profile</h1>
                     <h2>{userData.user.username}</h2>
                     <h4>{userData.user.email}</h4>
                 </div>
