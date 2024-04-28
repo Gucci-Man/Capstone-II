@@ -7,7 +7,7 @@ import Home from './routes/Home';
 import UserProfile from './routes/UserProfile';
 
 const RouteList = ({token, setIsLoggedIn, setToken}) => {
-    /* console.log(`Inside RouteList: ${token}`) */
+    // TODO: Add route for user recipes
     return(
         <Routes>
             <Route path="/" element={<WelcomePage token={token} setToken={setToken} setIsLoggedIn={setIsLoggedIn}/>} />
