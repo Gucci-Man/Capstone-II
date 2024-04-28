@@ -2,7 +2,7 @@ import React, { useEffect} from 'react';
 import { Link, useNavigate  } from 'react-router-dom';
 import LoginForm from './LoginForm';
 
-const WelcomePage = ({token}) => {
+const WelcomePage = ({token, setIsLoggedIn}) => {
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -15,7 +15,7 @@ const WelcomePage = ({token}) => {
     return (
         <div>
             <h1>Welcome!</h1>
-            <LoginForm />
+            <LoginForm setIsLoggedIn={setIsLoggedIn}/>
             <p>Don't have an account? <Link to="/register">Register</Link></p>
         </div>
     );

@@ -10,6 +10,8 @@ const UserProfile = ({token}) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         // if token is not available, return to welcome page
         if(!token && !localStorage.getItem('token')) {
@@ -28,7 +30,7 @@ const UserProfile = ({token}) => {
                     }
                 });
                 console.log(response.data)
-                setUserData(response.data);
+                setUserData(response.data.user);
             } catch (err) {
                 setError(err);
             } finally {
@@ -47,8 +49,8 @@ const UserProfile = ({token}) => {
             {userData && (
                 <div>
                     <h1>User Profile</h1>
-                    <h2>{userData.user.username}</h2>
-                    <h4>{userData.user.email}</h4>
+                    <h2>{userData.username}</h2>
+                    <h4>{userData.email}</h4>
                 </div>
             )}
         </div>

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'; // Assuming you want navigation 
 import RecipeCreation from './RecipeCreation'; // A component for creating recipes */
 
 // Only logged in users can see this page with token
-const Home = ({token}) => {
+const Home = ({token, setToken, setIsLoggedIn}) => {
     const navigate = useNavigate();
     const [username, setUsername] = useState(null);
     /* console.log(`Inside Home: ${token}`) */
@@ -19,21 +19,24 @@ const Home = ({token}) => {
         setUsername(storedUsername);
     }, [token, navigate]); // Add token and navigate as dependencies
 
-    const handleLogout = () => {
+    /* const handleLogout = () => {
         // Clear token from localStorage
         localStorage.removeItem('token');
 
         // Clear username from localStorage
         localStorage.removeItem('username');
 
+        // Update login state to re-render App
+        setIsLoggedIn(false);
+
         // Redirect to the Welcome page
         navigate('/', {replace: true});
-    };
+    }; */
 
     return (
         <div className="home-page">
             <h1>Welcome home {username}</h1>
-            <button onClick={handleLogout} className="btn btn-danger">Logout</button>
+            {/* <button onClick={handleLogout} className="btn btn-danger">Logout</button> */}
         </div>
     );
 };

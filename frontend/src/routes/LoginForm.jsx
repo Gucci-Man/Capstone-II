@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 
-const LoginForm = () => {
+const LoginForm = ({ setIsLoggedIn }) => {
     const initialState = {
         username: "",
         password: ""
@@ -43,6 +43,8 @@ const LoginForm = () => {
                 // Store token and username in localStorage if successful
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('username', username);
+
+                setIsLoggedIn(true); // set to true so that App re-renders with NavBar
                 navigate('/home', {replace: true}); // Redirect to home 
             } 
 
@@ -61,7 +63,6 @@ const LoginForm = () => {
     };
 
     return (
-        // TODO: Set up redirect once successful login
         <div>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="username">Username</label>
