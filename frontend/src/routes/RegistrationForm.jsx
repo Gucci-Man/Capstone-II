@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 
-const RegistrationForm = () => {
+const RegistrationForm = ({token, setIsLoggedIn}) => {
     const [formData, setFormData] = useState({
         username:'',
         firstName:'',
@@ -53,6 +53,8 @@ const handleSubmit = async (e) => {
             // Store token and username in localStorage if successful
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('username', username);
+
+            setIsLoggedIn(true); // set to true so that App re-renders with NavBar
             navigate('/home', { replace: true }); // Redirect to home 
         }
     } catch (err) {

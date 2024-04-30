@@ -13,7 +13,7 @@ function App() {
   useEffect(() => {
     const checkLoggedIn = () => {
       setToken(localStorage.getItem('token'));
-      setUsername(localStorage.getItem('username'));
+      setUsername(localStorage.getItem('username')); // For NavBar
       setIsLoggedIn(token !== null);
       /* console.log("inside useEffect App", isLoggedIn) */
     }

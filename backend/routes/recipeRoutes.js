@@ -46,7 +46,7 @@ router.post('/', ensureLoggedIn, async(req, res, next) => {
 
 router.get("/user/:username", ensureCorrectUser, async(req, res, next) => {
     try {
-        let recipes = await Recipe.user_all(req.user.user_id)
+        let recipes = await Recipe.user_all(req.user.id)
         if(recipes.length === 0) {
             return res.json("No recipes found for user")
         } else {

@@ -24,7 +24,7 @@ async function callChatGPT(ingredients) {
             messages: [
                 {
                     role:"system",
-                    content: "Act as a chef, create a recipe with the given ingredients and return in JSON having properties title, ingredients, total_time and instructions",
+                    content: "Act as a chef, create a health focused recipe with the given ingredients and return in JSON having properties title, ingredients, total_time and instructions",
                 },
                 {
                     role: "user",
