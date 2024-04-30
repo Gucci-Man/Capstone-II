@@ -1,27 +1,29 @@
 /* NavBar.css */
 nav {
-    background-color: #343a40; /* Dark gray background */
-    color: white;
-    padding: 1rem;
-    display: flex;          
-    align-items: center;    
-    justify-content: space-between;  
+  background-color: #343a40;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
 
-    /* Key CSS for positioning */
-    position: fixed;      /* Make it stick to the top */
-    top: 0;               /* Position at the very top */
-    left: 0;              /* Position at the very left */
-    width: 100%;          /* Span across the full page width */
-  }
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-right: 15px;
+}
+
+nav a:hover {
+    opacity: 0.8; /* Slightly fade on hover */
+}
   
-  nav a {
-    color: white;
-    text-decoration: none;  
-    margin-right: 15px;      
-  }
-  
-  .btn-danger {
+.btn-danger {
     background-color: #dc3545;
     border-color: #dc3545;
-  }
+}
   

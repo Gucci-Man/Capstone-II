@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import axios from 'axios';
+import RecipeComponent from './RecipeComponent'; // To display recipe
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 
@@ -56,7 +57,7 @@ const RecipeCreation = ({ token }) => {
         }
     };
     
-    // TODO: Style display of created recipe
+    // TODO: Use RecipeComponent to display instead of form
     return (
         <div>
             {isLoading && <div className="loading-screen">Loading...</div>}

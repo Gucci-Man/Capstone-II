@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import RecipeCreation from './RecipeCreation';
+import RecipeCreation from './Recipe/RecipeCreation';
 
 
 // Only logged in users can see this page with token

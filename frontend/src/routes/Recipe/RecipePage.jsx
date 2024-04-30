@@ -1,7 +1,7 @@
 import React, {useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
-// TODO create and import recipe component
+import RecipeComponent from './RecipeComponent';
 
 const RecipePage = ({ token }) => {
     const navigate = useNavigate();
@@ -19,6 +19,7 @@ const RecipePage = ({ token }) => {
     return (
         <div>
             <h1>Recipes Page</h1>
+            <RecipeComponent />
         </div>
     );
 };

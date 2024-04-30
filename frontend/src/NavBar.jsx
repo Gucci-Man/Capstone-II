@@ -24,9 +24,10 @@ const NavBar = ({ username, setIsLoggedIn }) => {
         <nav>
             <div className="navbar-left">
                 <Link to="/">Home</Link>
+                <Link to="/recipes">Recipes</Link>
+                <Link to={`/user/${username}`}>Profile</Link>
             </div>
             <div className="navbar-right">
-                <Link to={`/user/${username}`}>User Profile</Link>
                 <button onClick={handleLogout} className="btn btn-danger">Logout</button>
             </div>
         </nav>
