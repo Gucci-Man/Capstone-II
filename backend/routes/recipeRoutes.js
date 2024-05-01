@@ -37,14 +37,14 @@ router.post('/', ensureLoggedIn, async(req, res, next) => {
     }
 });
 
-/** GET user/[username] - request all recipes associated with user only
+/** GET /[username] - request all recipes associated with user only
  *  
- *  => { recipes }
+ *  => { recipes: [recipe,...] }
  * 
  *  Authorization required: login
  */
 
-router.get("/user/:username", ensureCorrectUser, async(req, res, next) => {
+router.get("/:username", ensureCorrectUser, async(req, res, next) => {
     try {
         let recipes = await Recipe.user_all(req.user.id)
         if(recipes.length === 0) {
