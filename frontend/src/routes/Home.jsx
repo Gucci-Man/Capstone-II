@@ -21,7 +21,7 @@ const Home = ({token, setToken, setIsLoggedIn}) => {
 
     return (
         <div className="home-page">
-            <h1>Welcome home {username}</h1>
+            <h1>Welcome {username}</h1>
             <RecipeCreation token={token}/>
         </div>
     );

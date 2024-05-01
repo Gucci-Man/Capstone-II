@@ -44,7 +44,7 @@ const RecipeCreation = ({ token }) => {
     
           // Handle successful creation
           console.log('Recipe created:', response.data);
-          setRecipeData(response.data)
+          setRecipeData(response.data.recipe)
           console.log("recipeData is", recipeData);
           /* navigate('/recipes'); */ 
     
@@ -63,12 +63,9 @@ const RecipeCreation = ({ token }) => {
             {isLoading && <div className="loading-screen">Loading...</div>}
 
             {!isLoading && recipeData && (
+                <RecipeComponent recipe={recipeData} />
                 // Display the created recipe
-                <div>
-                    <h2>{recipeData.recipe.title}</h2>
-                    <h2>Time: {recipeData.recipe.total_time}</h2>
-                    <p>{recipeData.recipe.instructions}</p>
-                </div>
+                
             )}
             <form onSubmit={handleSubmit}>
                 <label htmlFor="ingredient_1">Ingredient #1</label>

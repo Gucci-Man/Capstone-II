@@ -7,7 +7,7 @@ import Home from './routes/Home';
 import UserProfile from './routes/UserProfile';
 import RecipePage from './routes/Recipe/RecipePage';
 
-const RouteList = ({token, setIsLoggedIn, setToken}) => {
+const RouteList = ({token, setIsLoggedIn, setToken, username}) => {
     // TODO: Add route for user recipes
     return(
         <Routes>
@@ -16,7 +16,7 @@ const RouteList = ({token, setIsLoggedIn, setToken}) => {
             <Route path="/home" element={<Home token={token} setToken={setToken} setIsLoggedIn={setIsLoggedIn}/>} />
             <Route path="*" element={<NotFound />} />
             <Route path="/user/:name" element={<UserProfile token={token}/>}/>
-            <Route path="/recipes" element={<RecipePage token={token}/>}/>
+            <Route path="/recipes" element={<RecipePage token={token} username={username}/>}/>
         </Routes>
     )
 };

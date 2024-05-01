@@ -24,7 +24,7 @@ function App() {
       <BrowserRouter>
         {isLoggedIn && <NavBar token={token} username={username} setIsLoggedIn={setIsLoggedIn}/>}
         <div>
-          <RouteList token={token} setToken={setToken} setIsLoggedIn={setIsLoggedIn}/>
+          <RouteList token={token} setToken={setToken} setIsLoggedIn={setIsLoggedIn} username={username}/>
         </div>
       </BrowserRouter>
     </div>
