@@ -3,8 +3,8 @@ import "../../styles/Recipe.css"
 
 const RecipeComponent = ({ recipe }) => {
     const instructions = recipe.instructions.split("\n"); // Convert instructions to an array
-    /* console.log(instructions);
-    console.log(typeof instructions); */
+    
+    // TODO: Add delete button
     return (
         <div className="recipe">
             <h2>{recipe.title}</h2>

@@ -7,10 +7,11 @@ const baseURL = import.meta.env.VITE_BASE_URL;
 
 const RecipeCreation = ({ token }) => {
     const navigate = useNavigate();
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false); 
     const [error, setError] = useState(null);
     
     const [recipeData, setRecipeData] = useState(null); // Store the created recipe
+    const [showForm, setShowForm] = useState(true); // State to control form visibility
 
     const initialState = {
         ingredient_1: "",
@@ -56,8 +57,12 @@ const RecipeCreation = ({ token }) => {
           setFormData(initialState);
         }
     };
+
+    const toggleForm = () => {
+        setShowForm(!showForm);
+    }
     
-    // TODO: Use RecipeComponent to display instead of form
+    // TODO: Hide form when RecipeComponent appears 
     return (
         <div>
             {isLoading && <div className="loading-screen">Loading...</div>}

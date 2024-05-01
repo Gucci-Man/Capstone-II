@@ -29,7 +29,6 @@ const UserProfile = ({token}) => {
                         Authorization: `Bearer ${userToken}`
                     }
                 });
-                console.log(response.data)
                 setUserData(response.data.user);
             } catch (err) {
                 setError(err);
@@ -41,7 +40,7 @@ const UserProfile = ({token}) => {
         fetchData();
     }, [name]);
 
-    // TODO: Style this better
+    // TODO: Style this better. Add delete button
     return (
         <div>
             {isLoading && <div>Loading user data...</div>}

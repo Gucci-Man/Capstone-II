@@ -21,9 +21,7 @@ const RecipePage = ({ token, username }) => {
                 const response = await axios.get(`${baseURL}/recipes/${username}`, {
                     headers: { Authorization: `Bearer ${token}` }
                   });
-                console.log(response.data)
                 setRecipes(response.data.recipes);
-                console.log(typeof recipes);
             } catch (err) {
                 console.error("Error fetching recipes:", err);
             }
@@ -33,10 +31,11 @@ const RecipePage = ({ token, username }) => {
 
     }, [token, navigate]); // Add token and navigate as dependencies
 
+    // TODO: Hide title when recipes are shown
     return (
         <div>
             <h1>Recipes Page</h1>
-            {recipes.map((recipe) => ( // Render multiple RecipeComponents
+            {recipes && recipes.map((recipe) => ( // Render multiple RecipeComponents
                 <RecipeComponent key={recipe.id} recipe={recipe} /> // Pass recipe to component
             ))}
         </div>
