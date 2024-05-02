@@ -2,6 +2,7 @@ import React, {useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import RecipeComponent from './RecipeComponent';
+import '../../styles/recipeList.css'
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 
@@ -34,10 +35,12 @@ const RecipePage = ({ token, username }) => {
     // TODO: Hide title when recipes are shown
     return (
         <div>
-            <h1>Recipes Page</h1>
+            {recipes.length === 0 && <h1>Oops there aren't any recipes yet</h1>}
+            <div className="recipeList">
             {recipes && recipes.map((recipe) => ( // Render multiple RecipeComponents
                 <RecipeComponent key={recipe.id} recipe={recipe} /> // Pass recipe to component
             ))}
+            </div>
         </div>
     );
 };

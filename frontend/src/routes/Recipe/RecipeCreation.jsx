@@ -34,6 +34,7 @@ const RecipeCreation = ({ token }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
+        setShowForm(false); // Hide form once recipe is shown
         setError(null);
     
         try {
@@ -54,25 +55,27 @@ const RecipeCreation = ({ token }) => {
           console.error(err);
         } finally {
           setIsLoading(false); 
+          
           setFormData(initialState);
         }
     };
 
     const toggleForm = () => {
-        setShowForm(!showForm);
+        setShowForm(true); // show form 
     }
     
     // TODO: Hide form when RecipeComponent appears 
     return (
         <div>
-            {isLoading && <div className="loading-screen">Loading...</div>}
+            {isLoading && !showForm && <h2>Doing it's magic...</h2>}
 
-            {!isLoading && recipeData && (
-                <RecipeComponent recipe={recipeData} />
-                // Display the created recipe
-                
+            {!isLoading && !showForm && recipeData && (
+                <>
+                    <RecipeComponent recipe={recipeData} />
+                    <button onClick={toggleForm} className="btn btn-primary">Create another recipe</button>
+                </>
             )}
-            <form onSubmit={handleSubmit}>
+            {showForm && (<form onSubmit={handleSubmit}>
                 <label htmlFor="ingredient_1">Ingredient #1</label>
                 <input 
                     id="ingredient_1"
@@ -115,9 +118,79 @@ const RecipeCreation = ({ token }) => {
                     onChange={handleChange}
                 />
                 <button type="submit" className="btn btn-primary">Create Recipe</button>
-            </form>
+            </form>)}
         </div>
     );
+
+
+    /* 
+    return (
+        <div>
+          {isLoading && <div className="loading-screen">Loading...</div>}
+    
+          {!isLoading && (
+            <> 
+              {displayMode === 'recipe' && recipeData && (
+                <RecipeComponent recipe={recipeData} /> 
+              )}
+    
+              {displayMode === 'form' && (
+                <form onSubmit={handleSubmit}>
+                  <label htmlFor="ingredient_1">Ingredient #1</label>
+                <input 
+                    id="ingredient_1"
+                    type="text"
+                    name="ingredient_1"
+                    value={formData.ingredient_1}
+                    onChange={handleChange}
+                    required
+                />
+                <label htmlFor="ingredient_2">Ingredient #2</label>
+                <input 
+                    id="ingredient_2"
+                    type="text"
+                    name="ingredient_2"
+                    value={formData.ingredient_2}
+                    onChange={handleChange}
+                />
+                <label htmlFor="ingredient_3">Ingredient #3</label>
+                <input 
+                    id="ingredient_3"
+                    type="text"
+                    name="ingredient_3"
+                    value={formData.ingredient_3}
+                    onChange={handleChange}
+                />
+                <label htmlFor="ingredient_4">Ingredient #4</label>
+                <input 
+                    id="ingredient_4"
+                    type="text"
+                    name="ingredient_4"
+                    value={formData.ingredient_4}
+                    onChange={handleChange}
+                />
+                <label htmlFor="ingredient_5">Ingredient #5</label>
+                <input 
+                    id="ingredient_5"
+                    type="text"
+                    name="ingredient_5"
+                    value={formData.ingredient_5}
+                    onChange={handleChange}
+                />
+                <button type="submit" className="btn btn-primary">Create Recipe</button>
+                </form>
+              )}
+    
+              
+              <button className="btn btn-primary" onClick={() => setDisplayMode(displayMode === 'recipe' ? 'form' : 'recipe')}>
+                {displayMode === 'recipe' ? 'Create New Recipe' : 'View Recipe'}
+              </button> 
+            </>
+          )}
+        </div>
+     )
+
+     */
 }
 
 export default RecipeCreation;
