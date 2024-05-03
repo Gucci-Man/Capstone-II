@@ -32,7 +32,6 @@ const RecipePage = ({ token, username }) => {
 
     }, [token, navigate, recipes]); // Add token and navigate as dependencies
 
-    // TODO: Hide title when recipes are shown
     return (
         <div>
             {!recipes && <h1>Oops there aren't any recipes yet</h1>}
