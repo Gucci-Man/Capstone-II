@@ -43,13 +43,8 @@ const RecipeCreation = ({ token }) => {
           const response = await axios.post(`${baseURL}/recipes`, formData, {
             headers: { Authorization: `Bearer ${token}` }
           });
-    
           // Handle successful creation
-          console.log('Recipe created:', response.data);
           setRecipeData(response.data.recipe)
-          console.log("recipeData is", recipeData);
-          /* navigate('/recipes'); */ 
-    
         } catch (err) {
           setError('Failed to create recipe. Please try again.');
           console.error(err);
@@ -61,17 +56,16 @@ const RecipeCreation = ({ token }) => {
     };
 
     const toggleForm = () => {
-        setShowForm(true); // show form 
+        setShowForm(true); 
     }
-    
-    // TODO: Hide form when RecipeComponent appears 
+
     return (
         <div>
             {isLoading && !showForm && <h2>Doing it's magic...</h2>}
 
             {!isLoading && !showForm && recipeData && (
                 <>
-                    <RecipeComponent recipe={recipeData} />
+                    <RecipeComponent recipe={recipeData} token={token}/>
                     <button onClick={toggleForm} className="btn btn-primary">Create another recipe</button>
                 </>
             )}

@@ -30,15 +30,15 @@ const RecipePage = ({ token, username }) => {
 
         fetchData();
 
-    }, [token, navigate]); // Add token and navigate as dependencies
+    }, [token, navigate, recipes]); // Add token and navigate as dependencies
 
     // TODO: Hide title when recipes are shown
     return (
         <div>
-            {recipes.length === 0 && <h1>Oops there aren't any recipes yet</h1>}
+            {!recipes && <h1>Oops there aren't any recipes yet</h1>}
             <div className="recipeList">
             {recipes && recipes.map((recipe) => ( // Render multiple RecipeComponents
-                <RecipeComponent key={recipe.id} recipe={recipe} /> // Pass recipe to component
+                <RecipeComponent key={recipe.id} recipe={recipe} token={token}/>
             ))}
             </div>
         </div>

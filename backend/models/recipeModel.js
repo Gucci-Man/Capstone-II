@@ -97,7 +97,7 @@ class Recipe{
             FROM recipes
             WHERE id = $1
             AND creator_id = $2
-            RETURNING recipe_id`,
+            RETURNING id`,
             [recipe_id, user_id]);
 
         const recipe = result.rows[0];
