@@ -61,7 +61,7 @@ The frontend should typically connect to your running backend server.
 
 ## Technology Stack
 
-![JavaScript](icons8-javascript-48.png)
+![JavaScript](Logos/icons8-javascript-48.png)
 
 ![HTML5](Logos/icons8-html-48.png)
 
@@ -73,11 +73,11 @@ The frontend should typically connect to your running backend server.
 
 ![Express](Logos/icons8-express-js-64.png)
 
-![React](icons8-react-40.png)
+![React](Logos/icons8-react-40.png)
 
 ![SQL](Logos/icons8-sql-64.png)
 
-![PostgreSQL](icons8-postgresql-48.png)
+![PostgreSQL](Logos/icons8-postgresql-48.png)
 
 * **JavaScript**
 * **HTML**
