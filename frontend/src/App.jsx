@@ -18,7 +18,7 @@ function App() {
       /* console.log("inside useEffect App", isLoggedIn) */
     }
     checkLoggedIn();
-  }, [isLoggedIn, token]); // Execute only if token is changed
+  }, [isLoggedIn, token, username]); // Execute only if token is changed
   return (
     <div>
       <BrowserRouter>

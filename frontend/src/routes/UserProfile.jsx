@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
+import '../styles/UserProfile.css';
 import axios from 'axios';
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 
 const UserProfile = ({token}) => {
-    const { name } = useParams();
+    const { username } = useParams();
     const [userData, setUserData] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -22,9 +23,7 @@ const UserProfile = ({token}) => {
         const fetchData = async () => {
             setIsLoading(true);
             try {
-                /* console.log(`token is ${userToken}`);
-                console.log(`name is ${name}`) */
-                const response = await axios.get(`${baseURL}/users/${name}`, {
+                const response = await axios.get(`${baseURL}/users/${username}`, {
                     headers: {
                         Authorization: `Bearer ${userToken}`
                     }
@@ -38,20 +37,28 @@ const UserProfile = ({token}) => {
         };
 
         fetchData();
-    }, [name]);
+    }, [username]);
 
-    // TODO: Style this better. Add delete button
+    // Add delete button
     return (
-        <div>
+        <div className="profile-container">
             {isLoading && <div>Loading user data...</div>}
-            {error && <div>Error fetching data: {error.message}</div>}
-            {userData && (
+            {error && <div className="error-message">Error fetching data: {error.message}</div>}
                 <div>
-                    <h1>User Profile</h1>
-                    <h2>{userData.username}</h2>
-                    <h4>{userData.email}</h4>
+                    {userData && (
+                        <section className="profile-info">
+                            <header>
+                                <h1>About Me</h1>
+                            </header>
+                            <ul className="profile-details">
+                                <li><strong>Username:</strong> {userData.username}</li>
+                                <li><strong>Email:</strong> {userData.email}</li>
+                                <li><strong>First Name:</strong> {userData.firstName}</li>
+                                <li><strong>Last Name:</strong> {userData.lastName}</li>
+                            </ul>
+                        </section>
+                    )}
                 </div>
-            )}
         </div>
     );
     

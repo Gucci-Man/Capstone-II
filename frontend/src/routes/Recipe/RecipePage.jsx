@@ -34,7 +34,7 @@ const RecipePage = ({ token, username }) => {
 
     return (
         <div>
-            {!recipes && <h1>Oops there aren't any recipes yet</h1>}
+            {!recipes && <h1>Oops there aren't any recipes here, go create some!</h1>}
             <div className="recipeList">
             {recipes && recipes.map((recipe) => ( // Render multiple RecipeComponents
                 <RecipeComponent key={recipe.id} recipe={recipe} token={token}/>
