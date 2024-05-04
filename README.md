@@ -61,35 +61,42 @@ The frontend should typically connect to your running backend server.
 
 ## Technology Stack
 
-![JavaScript](Logos/icons8-javascript-48.png)
+### Frontend
 
-![HTML5](Logos/icons8-html-48.png)
+* **Languages:**
 
-![CSS](Logos/icons8-css-48.png)
+     [![JavaScript](Logos/icons8-javascript-48.png)](https://developer.mozilla.org/en-US/docs/Web/JavaScript) 
+    [![HTML5](Logos/icons8-html-48.png)](https://developer.mozilla.org/en-US/docs/Web/HTML) 
+    [![CSS](Logos/icons8-css-48.png)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+* **Framework/Library:**
 
-![Bootstrap](Logos/icons8-bootstrap-48.png)
+    [![React](Logos/icons8-react-40.png)](https://reactjs.org/)  
+* **Styling:** 
 
-![Node.js](Logos/icons8-nodejs-48.png)
+    [![Bootstrap](Logos/icons8-bootstrap-48.png)](https://getbootstrap.com/)
 
-![Express](Logos/icons8-express-js-64.png)
+### Backend
 
-![React](Logos/icons8-react-40.png)
+* **Runtime Environment:**
+    
+    [![Node.js](Logos/icons8-nodejs-48.png)](https://nodejs.org/) 
+* **Web Framework:**
+    
+    [![Express](Logos/icons8-express-js-64.png)](https://expressjs.com/) 
+* **Database:**
+    
+    [![PostgreSQL](Logos/icons8-postgresql-48.png)](https://postgresql.org/) 
+    [![SQL](Logos/icons8-sql-64.png)](https://www.w3schools.com/sql/) 
 
-![SQL](Logos/icons8-sql-64.png)
+### Utilities
 
-![PostgreSQL](Logos/icons8-postgresql-48.png)
+* **Data Fetching:**
+    * [Axios](https://axios-http.com/)  
+* **Authentication:**
+    * [Bcrypt](https://www.npmjs.com/package/bcrypt)   
+    * [JSON Web Token (JWT)](https://jwt.io/)  
+* **Validation:**
+    * [JSON Schema](https://json-schema.org/)  
+* **Testing:**
+    * [Jest](https://jestjs.io/)  
 
-* **JavaScript**
-* **HTML**
-* **CSS** 
-* **Bootstrap**
-* **Node.js**
-* **Express**
-* **React**
-* **SQL**
-* **PostgreSQL**
-* **Axios**
-* **Bcrypt**
-* **JSON Web Token**
-* **JSON Schema**
-* **Jest**
