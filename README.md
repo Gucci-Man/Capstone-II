@@ -6,6 +6,8 @@ FoodieFit is a web application designed to help users manage their health and we
 
 **API**: https://platform.openai.com/docs/overview
 
+**Deployed Link**: https://foodiefit.onrender.com
+
 ## Features
 
 * **Recipe Creation & Management:** Users can create and store personalized recipes, allowing them to control ingredients and adapt dishes to their dietary needs or preferences. 
