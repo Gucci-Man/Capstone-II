@@ -5,13 +5,40 @@ import axios from 'axios';
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 
-const UserProfile = ({token}) => {
+const UserProfile = ({token, setIsLoggedIn}) => {
     const { username } = useParams();
     const [userData, setUserData] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
     const navigate = useNavigate();
+
+    const handleDelete = async () => {
+        try {
+            const userToken = localStorage.getItem('token');
+            const response = await axios.delete(`${baseURL}/users/${username}`, {
+                headers: {
+                    Authorization: `Bearer ${userToken}`
+                }
+            });
+            if (response.status === 200) {
+                // Clear token from localStorage
+                localStorage.removeItem('token');
+
+                // Clear username from localStorage
+                localStorage.removeItem('username');
+
+                // Update login state to re-render App
+                setIsLoggedIn(false);
+
+                // Redirect to the Welcome page
+                navigate('/', {replace: true});
+            }
+        } catch (err) {
+            // Handle error
+            setError(err);
+        }
+    }
 
     useEffect(() => {
         // if token is not available, return to welcome page
@@ -56,6 +83,7 @@ const UserProfile = ({token}) => {
                                 <li><strong>First Name:</strong> {userData.firstName}</li>
                                 <li><strong>Last Name:</strong> {userData.lastName}</li>
                             </ul>
+                            <button type="button" className="btn btn-danger" onClick={handleDelete}>Delete User</button>
                         </section>
                     )}
                 </div>

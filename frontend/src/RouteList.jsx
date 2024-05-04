@@ -15,7 +15,7 @@ const RouteList = ({token, setIsLoggedIn, setToken, username}) => {
             <Route path="/register" element={<RegistrationForm token={token} setToken={setToken} setIsLoggedIn={setIsLoggedIn}/>} />
             <Route path="/home" element={<Home token={token} setToken={setToken} setIsLoggedIn={setIsLoggedIn}/>} />
             <Route path="*" element={<NotFound />} />
-            <Route path="/user/:username" element={<UserProfile token={token} username={username}/>}/>
+            <Route path="/user/:username" element={<UserProfile token={token} username={username} setIsLoggedIn={setIsLoggedIn}/>}/>
             <Route path="/recipes" element={<RecipePage token={token} username={username}/>}/>
         </Routes>
     )
