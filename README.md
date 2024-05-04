@@ -17,6 +17,9 @@ FoodieFit is a web application designed to help users manage their health and we
 
 These features were chosen to create a user-friendly platform that empowers individuals to take charge of their health through mindful recipe creation and meal planning. By allowing users to personalize their recipes, FoodieFit caters to a wide range of dietary needs and preferences, making healthy eating more accessible and enjoyable.
 
+![Login](Screenshots/Login.png)
+_Login Page_
+
 ## Setup
 
 To get FoodieFit up and running, follow these steps:
@@ -48,7 +51,11 @@ $ psql < db_setup.sql
 2. Install dependencies: `npm install`
 3. Start the development server: `npm run dev`
 
-The frontend should typically connect to your running backend server.
+The frontend should typically connect to your running backend 
+server.
+
+![Recipe Form](Screenshots/Recipe_Form.png)
+_Home page_
 
 ## Standard User Flow
 
@@ -59,6 +66,9 @@ The frontend should typically connect to your running backend server.
 
 5. **Logout:** When finished, users can log out to exit the application.
 
+![Recipe](Screenshots/Recipe.png)
+_Newly created recipe_
+
 ## Technology Stack
 
 ### Frontend
@@ -68,9 +78,11 @@ The frontend should typically connect to your running backend server.
      [![JavaScript](Logos/icons8-javascript-48.png)](https://developer.mozilla.org/en-US/docs/Web/JavaScript) 
     [![HTML5](Logos/icons8-html-48.png)](https://developer.mozilla.org/en-US/docs/Web/HTML) 
     [![CSS](Logos/icons8-css-48.png)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+
 * **Framework/Library:**
 
     [![React](Logos/icons8-react-40.png)](https://reactjs.org/)  
+
 * **Styling:** 
 
     [![Bootstrap](Logos/icons8-bootstrap-48.png)](https://getbootstrap.com/)
@@ -80,9 +92,11 @@ The frontend should typically connect to your running backend server.
 * **Runtime Environment:**
     
     [![Node.js](Logos/icons8-nodejs-48.png)](https://nodejs.org/) 
+
 * **Web Framework:**
     
     [![Express](Logos/icons8-express-js-64.png)](https://expressjs.com/) 
+
 * **Database:**
     
     [![PostgreSQL](Logos/icons8-postgresql-48.png)](https://postgresql.org/) 
@@ -99,4 +113,3 @@ The frontend should typically connect to your running backend server.
     * [JSON Schema](https://json-schema.org/)  
 * **Testing:**
     * [Jest](https://jestjs.io/)  
-
