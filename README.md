@@ -1,58 +1,95 @@
-# FoodieFit
+# FoodieFit: A Delicious Journey to Fitness  
+
+FoodieFit is a web application designed to help users manage their health and well-being through a fun and personalized approach to food and fitness. 
 
 ## Created by Adel Ngo
 
 **API**: https://platform.openai.com/docs/overview
 
+## Features
+
+* **Recipe Creation & Management:** Users can create and store personalized recipes, allowing them to control ingredients and adapt dishes to their dietary needs or preferences. 
+
+* **User Authentication:** Secure login and registration functionalities enable personalized recipe storage and management.
+* **User Profile Management:** Users can view and delete their profile information.
+* **Recipe Display:** Users can view and access their created recipes, making it easy to find and cook their favorite dishes.
+* **Responsive Design:** The application adapts to various screen sizes, ensuring a seamless user experience across different devices.
+
+These features were chosen to create a user-friendly platform that empowers individuals to take charge of their health through mindful recipe creation and meal planning. By allowing users to personalize their recipes, FoodieFit caters to a wide range of dietary needs and preferences, making healthy eating more accessible and enjoyable.
+
+## Setup
+
+To get FoodieFit up and running, follow these steps:
+
+### Prerequisites
+
+* Node.js and npm (or yarn) installed on your system.
+* PostgreSQL database set up.
+* An API key from OpenAI 
+* A `.env` file to store sensitive information like the _OpenAI API Key_ and _Bcrypt Encryption Key_.
+
 **To seed database:**
-psql < foodie_fit_db_setup.sql
+$ psql < db_setup.sql
 
-### Running the backend
-`npm run start` - Starts the backend in production mode
+### Backend Setup
 
-`npm run dev` - Starts the backend in development mode
+1. Clone the project repository.
+2. Navigate to the backend directory in your terminal.
+3. Install dependencies: `npm install` 
+4. Set up your environment variables (API keys, database credentials, etc.)
+5. Start the development server: `npm run dev` 
+   OR start the production server: `npm run start`
 
-`npm run test` - Runs tests
+**To run tests**: `npm run test` 
 
-### Running the frontend
-`npm run dev` - Starts the frontend in dev mode
+### Frontend Setup
 
-## Project Layout
+1. Navigate to the frontend directory in your terminal.
+2. Install dependencies: `npm install`
+3. Start the development server: `npm run dev`
 
-1. **Backend API**: you'll need a backend server and API to act as an intermediary between your React app and the PostgreSQL database. Popular technologies for building this include:
+The frontend should typically connect to your running backend server.
 
-* Node.js with Express.js: JavaScript-based framework for creating web servers and APIs.
+## Standard User Flow
 
-2. **API Endpoints**: Your backend API will define endpoints that your React app can interact with. Examples:
+1. **Welcome & Login:** Users arrive at the Welcome Page where they can either log in using an existing account or navigate to the registration page to create a new account.
+2. **Authentication:** Upon successful login, users are redirected to their personalized homepage.
+3. **Recipe Creation & Management:** Users can access a recipe creation form to add new recipes with ingredients and instructions. They can also view and manage their existing recipes on their homepage.
+4. **User Profile Management:** Users can access and edit their profile information from their homepage.
 
-* GET /recipes: Fetches a list of recipes.
-* POST /recipes: Creates and adds a new recipe.
-* GET /users/:id/favorites: Retrieves a user's favorite recipes.
+5. **Logout:** When finished, users can log out to exit the application.
 
-3. **Data Fetching in React**:  You'll use techniques within React to make requests to these API endpoints and handle the data:
+## Technology Stack
 
-* Libraries like Axios: Provide more features and a cleaner interface for API interactions.
+![JavaScript](icons8-javascript-48.png)
 
-### Simplified Flow
+![HTML5](Logos/icons8-html-48.png)
 
-1. User interacts with your React app (e.g., searches for a recipe).
-2. React makes a request to your backend API (e.g., GET /recipes?search=chicken).
-3. Your backend queries the PostgreSQL database.
-4. The backend sends the relevant recipe data back to your React app in a format React can understand (usually JSON).
-5. React updates the UI to display the search results.
+![CSS](Logos/icons8-css-48.png)
 
-## Core Components
+![Bootstrap](Logos/icons8-bootstrap-48.png)
 
-1. **PostgreSQL Setup**:
+![Node.js](Logos/icons8-nodejs-48.png)
 
-    - Ensure you have a PostgreSQL database set up with your schema (tables for Users, Recipes, etc.) created.
+![Express](Logos/icons8-express-js-64.png)
 
-2. **Node.js Backend**:
+![React](icons8-react-40.png)
 
-    - Install necessary dependencies:
-    - npm install express pg ('pg' is the PostgreSQL client for Node.js)
-    - Create API endpoints for data interactions.
-ChatGPT API:
+![SQL](Logos/icons8-sql-64.png)
 
-3. **Obtain your ChatGPT API key.**
-    - Set up a way to make requests to the ChatGPT API from your backend.
+![PostgreSQL](icons8-postgresql-48.png)
+
+* **JavaScript**
+* **HTML**
+* **CSS** 
+* **Bootstrap**
+* **Node.js**
+* **Express**
+* **React**
+* **SQL**
+* **PostgreSQL**
+* **Axios**
+* **Bcrypt**
+* **JSON Web Token**
+* **JSON Schema**
+* **Jest**
