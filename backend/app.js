@@ -1,9 +1,17 @@
-/** 
- *  Backend server
- * 
- *  To start backend: nodemon app.js
- * 
- **/
+/**
+ * app.js
+ * ------
+ * Main entry point for [Your Application Name] backend server. This file sets up:
+ *
+ * *  Express server configuration.
+ * *  CORS middleware (for cross-origin requests).
+ * *  Body parsing middleware.
+ * *  Authentication middleware.
+ * *  API route definitions.
+ * *  Error handling middleware. 
+ *
+ * To start backend: nodemon app.js OR npm run dev
+ */
 
 const express = require("express");
 const cors = require("cors");

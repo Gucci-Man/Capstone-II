@@ -57,7 +57,6 @@ const LoginForm = ({ setIsLoggedIn }) => {
 
             if (err.response && err.response.status == 401) {
                 //Specific handling for wrong username/password (display to user)
-                /* alert('Invalid username or password'); */
                 const loginError = document.querySelector('.error-message');
                 loginError.textContent = 'Invalid username or password';
                 loginError.style.color = 'red';

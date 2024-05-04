@@ -1,5 +1,14 @@
 /**
- * Configurations 
+ * config.js
+ * ---------
+ * Stores central configuration settings for the application, handling both 
+ * sensitive data (API keys) and environment-specific options.
+ * 
+ * Key Features:
+ * *  Loads environment variables from a `.env` file (using dotenv).
+ * *  Provides a dynamic database URI based on environment (development, testing, etc.).
+ * *  Customizes bcrypt work factor for faster testing.
+ *
  */
 
 require('dotenv').config();
@@ -19,9 +28,6 @@ function getDatabaseUri() {
 const DB = (process.env.NODE_ENV === "test")
     ? "foodie_fit_test"
     : "foodie_fit";
-
-/* console.log(`DB is ${DB}`);
-console.log(`NODE_ENV is ${process.env.NODE_ENV}`); */
 
 // Speed up bcrypt during tests, since algorithm safety isn't being tested
 const BCRYPT_WORK_FACTOR = process.env.NODE_ENV === "test" ? 1 : 12;

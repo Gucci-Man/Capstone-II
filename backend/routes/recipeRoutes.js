@@ -1,6 +1,23 @@
 /**
- *  Routes for calling ChatGPT API
- * 
+ * recipeRoutes.js
+ * ---------------
+ * Defines routes for interacting with recipes, including integration with the 
+ * ChatGPT API for recipe generation. Provides the following functionality:
+ *
+ * *  /add: Calls ChatGPT to generate a recipe based on ingredients, then saves
+ *          the result to the database (requires login).
+ * *  /[username]: Retrieves all recipes created by a specific user (requires login).
+ * *  /:id: Fetches a single recipe by its ID (requires login).
+ * *  /delete/:id: Deletes a recipe, with authorization to ensure only the creator
+ *                 can delete (requires login).
+ * *  / (optional): Retrieves a list of all recipes.
+ *
+ * Dependencies:
+ * *  express: For creating Express routes.
+ * *  jsonschema: For input validation against a JSON schema.
+ * *  Recipe (from recipeModel.js): For interacting with the recipe database model.
+ * *  Middleware (from auth.js):  For authorization.
+ * *  Error classes (from expressErrors.js): For error handling.
  */
 
 const jsonschema = require("jsonschema");
@@ -44,7 +61,7 @@ router.post('/', ensureLoggedIn, async(req, res, next) => {
  *  Authorization required: login
  */
 
-router.get("/:username", ensureCorrectUser, async(req, res, next) => {
+router.get("/:username", ensureLoggedIn, ensureCorrectUser, async(req, res, next) => {
     try {
         let recipes = await Recipe.user_all(req.user.id)
         if(recipes.length === 0) {
@@ -96,7 +113,7 @@ router.get("/:id", ensureLoggedIn, async(req, res, next) => {
  *  Authorization required: login
  */
 
-router.delete("/:id", async(req, res, next) => {
+router.delete("/:id", ensureLoggedIn, async(req, res, next) => {
     try {
         await Recipe.remove(req.params.id, req.user.id);
         return res.json({deleted: req.params.id});

@@ -1,3 +1,9 @@
+/**
+ * server.js
+ * ---------
+ * Main entry point for starting the application's web server.
+ */
+
 const app = require("./app")
 
 const { PORT } = require("./config");

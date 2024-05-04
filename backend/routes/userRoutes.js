@@ -1,6 +1,22 @@
 /**
- *  Routes for user
+ * userRoutes.js
+ * -------------
+ * Defines routes for managing user profiles. Supports the following actions:
+ *
+ * *  /:username:  Retrieves details for a specific user (requires login).
+ * *  /all: Fetches a list of all registered users (requires login).
+ * *  /update/:username: Modifies a user's profile (requires login, user must be updating their own account).
+ * *  /delete/:username: Removes a user's account (requires login, user must be deleting their own account).
+ *
+ * Dependencies:
+ * *  express: For creating Express routes.
+ * *  jsonschema: For input validation against a JSON schema.
+ * *  User (from userModel.js): Interacts with the user data model. 
+ * *  Middleware (from auth.js):  For authorization.
+ * *  Error classes (from expressErrors.js): For error handling.
  * 
+ * Security Note: Routes that modify or delete user data are protected to ensure 
+ *                only the correct user can perform those actions.
  */
 
 const jsonschema = require("jsonschema");
@@ -36,7 +52,7 @@ router.get('/', ensureLoggedIn, async (req, res, next) => {
  *  Authorization required: login
  */
 
-router.get("/:username", ensureCorrectUser, async function (req, res, next) {
+router.get("/:username", ensureLoggedIn, ensureCorrectUser, async function (req, res, next) {
     try {
         let user = await User.get(req.params.username);
         return res.json({user});
@@ -55,7 +71,7 @@ router.get("/:username", ensureCorrectUser, async function (req, res, next) {
  *  Authorization required: login
  */
 
-router.patch("/:username", ensureCorrectUser, async function (req, res, next) {
+router.patch("/:username", ensureLoggedIn, ensureCorrectUser, async function (req, res, next) {
     try {
         // check if request is valid, if not throw error
         const validator = jsonschema.validate(req.body, userUpdateSchema);
@@ -78,7 +94,7 @@ router.patch("/:username", ensureCorrectUser, async function (req, res, next) {
  *  Authorization required: login
  */
 
-router.delete("/:username", ensureCorrectUser, async function (req, res, next) {
+router.delete("/:username", ensureLoggedIn, ensureCorrectUser, async function (req, res, next) {
     try {
         await User.remove(req.params.username);
         return res.json({deleted: req.params.username });

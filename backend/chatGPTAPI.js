@@ -1,10 +1,24 @@
 /**
- *  method to call ChatGPT API
+ * chatGPTAPI.js
+ * -------------
+ * This file encapsulates interactions with the ChatGPT API for recipe generation.
+ * Key features:
+ *
+ * *  callChatGPT: Takes an ingredients object and calls ChatGPT to generate a 
+ *                 health-focused recipe in JSON format.
+ *                 Handles potential errors from the ChatGPT request.
+ *
+ * Dependencies:
+ * *  openai:  OpenAI library for API communication.
+ * *  config.js: Provides the ChatGPT API key.
+ * *  Error classes (from expressErrors.js): For error handling.
+ * 
+ * Security Note: ChatGPT API key is stored securely in config.js 
  */
 
 const { CHATGPT_KEY } = require("./config");
 const { OpenAI } = require('openai');
-const { ExpressError, NotFoundError, BadRequestError, UnauthorizedError }= require("./expressError");
+const { BadRequestError }= require("./expressError");
 const openai = new OpenAI({ apiKey: CHATGPT_KEY });
 
     /**
@@ -17,14 +31,14 @@ async function callChatGPT(ingredients) {
     try {
         // Convert ingredients JSON obj to a string as "prompt" then send to openai
         const recipeArr = Object.values(ingredients);
-        /* console.log(`recipeArr is ${recipeArr}`); */
         const prompt = recipeArr.join(", ");
-        /* console.log(`prompt is ${prompt}`); */
         const response = await openai.chat.completions.create({
             messages: [
                 {
                     role:"system",
-                    content: "Act as a chef, create a health focused recipe with the given ingredients and return in JSON having properties title, ingredients, total_time and instructions. Have the instructions remain as a giant string to be delimited by \n",
+                    content: `Act as a chef, create a health focused recipe with the given ingredients 
+                    and return in JSON having properties title, ingredients, total_time and instructions. 
+                    Have the instructions remain as a giant string to be delimited by \n`,
                 },
                 {
                     role: "user",

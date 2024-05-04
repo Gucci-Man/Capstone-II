@@ -6,25 +6,24 @@ import NavBar from './NavBar';
 
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Check if user is already logged in
   const [token, setToken] = useState(null);
   const [username, setUsername] = useState('');
-  /* console.log("In App", isLoggedIn) */
+  
   useEffect(() => {
     const checkLoggedIn = () => {
-      setToken(localStorage.getItem('token'));
+      setToken(localStorage.getItem('token')); 
       setUsername(localStorage.getItem('username')); // For accessing backend
       setIsLoggedIn(token !== null);
-      /* console.log("inside useEffect App", isLoggedIn) */
     }
     checkLoggedIn();
-  }, [isLoggedIn, token, username]); // Execute only if token is changed
+  }, [isLoggedIn, token, username]); 
   return (
     <div>
       <BrowserRouter>
         {isLoggedIn && <NavBar token={token} username={username} setIsLoggedIn={setIsLoggedIn}/>}
         <div>
-          <RouteList token={token} setToken={setToken} setIsLoggedIn={setIsLoggedIn} username={username}/>
+          <RouteList token={token} setIsLoggedIn={setIsLoggedIn} username={username}/>
         </div>
       </BrowserRouter>
     </div>

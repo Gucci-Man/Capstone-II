@@ -1,6 +1,21 @@
+/**
+ * auth.js
+ * -------
+ * Provides authentication and authorization middleware for securing API routes.
+ *
+ * Functions:
+ *   * authenticateJWT: Verifies a JSON Web Token (JWT) in the request header, 
+ *                     attaching the decoded user payload to the request object if valid.
+ *   * ensureLoggedIn:  Ensures a user is logged in by checking for a valid payload 
+ *                      on the request object. Throws an UnauthorizedError if not found.
+ *   * ensureCorrectUser: Verifies that the authenticated user's username matches 
+ *                        the username provided in the request parameters. 
+ *                        Throws an UnauthorizedError if there's a mismatch. 
+ */ 
+
 const jwt = require("jsonwebtoken");
 const { SECRET_KEY } = require("../config");
-const { ExpressError, UnauthorizedError }= require("../expressError");
+const { UnauthorizedError }= require("../expressError");
 
 /** Middleware: Auth JWT token, add auth'd user (if any) to req. */
 function authenticateJWT(req, res , next) {
@@ -15,7 +30,6 @@ function authenticateJWT(req, res , next) {
 
         // payload should have included username property
         const payload = jwt.verify(token, SECRET_KEY);
-        /* console.log(`INSIDE authenticateJWT, payload is ${JSON.stringify(payload)}`); */
         // add payload on to req.user. If req..user exist, then token is verified.
         req.user = payload;
         return next();

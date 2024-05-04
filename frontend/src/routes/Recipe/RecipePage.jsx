@@ -27,9 +27,8 @@ const RecipePage = ({ token, username }) => {
                 console.error("Error fetching recipes:", err);
             }
         };
-
         fetchData();
-
+        
     }, [token, navigate, recipes]); // Add token and navigate as dependencies
 
     return (

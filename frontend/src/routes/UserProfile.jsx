@@ -66,7 +66,6 @@ const UserProfile = ({token, setIsLoggedIn}) => {
         fetchData();
     }, [username]);
 
-    // Add delete button
     return (
         <div className="profile-container">
             {isLoading && <div>Loading user data...</div>}

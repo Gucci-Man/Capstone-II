@@ -1,4 +1,22 @@
-/** Routes for authentication */
+/**
+ * authRoutes.js
+ * -------------
+ * Defines routes for user authentication and registration. Includes:
+ * 
+ * *  /register: Handles new user registration (schema validation included).
+ * *  /login: Authenticates existing users.
+ *
+ * On successful registration or login, generates and returns a JSON Web Token (JWT).
+ *
+ * Dependencies:
+ * *  express: For creating Express routes.
+ * *  jsonschema: For input validation against a JSON schema.
+ * *  jwt: For JSON Web Token (JWT) generation.
+ * *  User (from userModel.js): Interacts with the user data model. 
+ * *  Error classes (from expressErrors.js): For error handling.
+ * 
+ * Security Note: User passwords are handled securely by the User model.
+ */
 
 const jsonschema = require("jsonschema");
 

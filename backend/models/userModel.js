@@ -1,12 +1,29 @@
-/** User class for FoodieFit */
+/**
+ * userModel.js
+ * --------------
+ * Manages user data and interactions with the 'users' database table. Provides 
+ * functions for:
+ *
+ * *  User registration (with password hashing).
+ * *  Authentication (username/password verification).
+ * *  Retrieving user information (all users or by username).
+ * *  Updating user profiles (partial updates supported).
+ * *  Deleting users.
+ *
+ * Dependencies:
+ * *  db (from db.js): Provides database connection.
+ * *  sqlForPartialUpdate (from helpers/sql.js):  Helper for dynamic SQL query generation.
+ * *  bcrypt: For secure password hashing.
+ * *  Error classes (from expressErrors.js): For error handling.
+ * 
+ * Security Note: Passwords are securely hashed using bcrypt before storage. 
+ */
 
 const { ExpressError, NotFoundError, BadRequestError, UnauthorizedError }= require("../expressError");
 const db = require("../db");
 const { sqlForPartialUpdate } = require("../helpers/sql");
 const bcrypt = require("bcrypt");
 const { BCRYPT_WORK_FACTOR } = require("../config");
-
-/** User of FoodFit */
 
 class User {
     /** register new user -- returns 
