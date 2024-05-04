@@ -1,3 +1,17 @@
+/**
+ * NavBar.jsx
+ * ----------
+ * Component representing the application's navigation bar.
+ * Provides:
+ *   * Links to core sections of the application (Home, Recipes, Profile).
+ *   * A logout button that clears user credentials and redirects. 
+ *
+ * Dependencies:
+ * *  react-router-dom (Link, useNavigate): For navigation.
+ * 
+ * Note: This component is conditionally rendered based on login status.
+ */
+
 import React from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import "./styles/NavBar.css";

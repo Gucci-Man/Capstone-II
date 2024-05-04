@@ -1,3 +1,18 @@
+/**
+ * UserProfile.jsx
+ * ---------------
+ * Fetches and displays the profile information of a specified user. Includes:
+ * 
+ * *  Authentication Guard:  Redirects to the welcome page if the user is not logged in.
+ * *  Retrieves user details (username, email, first name, last name) from the backend API.
+ * *  Handles loading and error states during data fetching.
+ * *  Provides functionality for the user to delete their own account.
+ *
+ * Dependencies:
+ * *  react-router-dom (useParams, useNavigate): For accessing the username route parameter and for redirecting after actions.
+ *  axios: For making API requests to the backend. 
+ */ 
+
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 import '../styles/UserProfile.css';

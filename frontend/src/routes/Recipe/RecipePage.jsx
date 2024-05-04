@@ -1,3 +1,20 @@
+/**
+ * RecipePage.jsx
+ * --------------
+ * Fetches and displays a list of recipes associated with the logged-in user.
+ * Includes:
+ * 
+ * *  Authentication check: Redirects to the welcome page if the user is not logged in.
+ * *  Recipe retrieval from the backend API.
+ * *  Rendering of individual recipes using the RecipeComponent.
+ * *  Handles the scenario where a user has no recipes.
+ * 
+ * Dependencies:
+ * *  react-router-dom (useNavigate): For redirecting if not authenticated.
+ *  axios: For making API requests to the backend. 
+ *  RecipeComponent.jsx:  To display individual recipe cards.
+ */ 
+
 import React, {useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';

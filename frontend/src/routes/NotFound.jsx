@@ -1,3 +1,10 @@
+/**
+ * NotFound.jsx
+ * ------------
+ * Simple component to render a "404 - Page Not Found" message.  
+ * Used to display an error when an invalid route is accessed.
+ */
+
 import React from 'react';
 
 const NotFound = () => {

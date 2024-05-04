@@ -1,3 +1,17 @@
+/**
+ * WelcomePage.jsx
+ * ---------------
+ * Serves as the initial landing page for the application. Provides:
+ *
+ * *  Redirection for logged-in users: Automatically redirects to the home page if a valid token is detected.
+ * *  Login form: Includes the LoginForm component for user authentication.
+ * *  Link to registration: Guides new users to the registration page. 
+ *
+ * Dependencies:
+ * *  react-router-dom (Link, useNavigate): For links and redirects.
+ *  LoginForm.jsx: Component responsible for handling user login. 
+ */
+
 import React, { useEffect} from 'react';
 import { Link, useNavigate  } from 'react-router-dom';
 import LoginForm from './Auth/LoginForm';

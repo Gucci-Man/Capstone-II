@@ -1,4 +1,4 @@
-# Capstone II
+# FoodieFit
 
 ## Created by Adel Ngo
 

@@ -1,3 +1,19 @@
+/**
+ * RecipeComponent.jsx
+ * -------------------
+ * Renders an individual recipe card, including:
+ *  * Title
+ *  * Preparation time
+ *  * Step-by-step instructions
+ *  * Delete button (protected by authentication)
+ *
+ * Provides functionality to delete a recipe and displays a success message.
+ * 
+ * Dependencies:
+ * *  axios: For making API requests to the backend. 
+ *  React Bootstrap (optional): If using the `alert alert-success` class.
+ */
+
 import React, { useState } from 'react';
 import "../../styles/Recipe.css"
 import axios from 'axios';

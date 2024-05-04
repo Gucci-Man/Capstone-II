@@ -1,5 +1,23 @@
+/**
+ * LoginForm.jsx
+ * -------------
+ * Component responsible for handling user login. Includes:
+ * 
+ * *  Form fields for username and password.
+ * *  Logic to submit login credentials to the backend API.
+ * *  Error handling for invalid credentials.
+ * *  Authentication state management:
+ *      * Stores token in localStorage on successful login.
+ *      * Updates application-level login state (setIsLoggedIn).
+ *      * Redirects to home page upon successful login.
+ *
+ * Dependencies:
+ * *  react-router-dom (useNavigate): For redirecting after login.
+ *  axios: For making API requests to the backend. 
+ */
+
 import React, { useState, useEffect } from 'react';
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import '../../styles/LoginForm.css'
 import axios from 'axios';
 
@@ -15,6 +33,7 @@ const LoginForm = ({ setIsLoggedIn }) => {
 
     useEffect(() => {
         // Check if user is already authenticated (logged in)
+        // Redirects if a user is already logged in
         if (localStorage.getItem('token')) {
             navigate('/home', { replace: true });
         }

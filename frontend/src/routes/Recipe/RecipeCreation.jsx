@@ -1,3 +1,19 @@
+/**
+ * RecipeCreation.jsx
+ * ------------------
+ * Provides a form for users to create recipes using ingredients they input. 
+ * Features:
+ * 
+ * *  Form submission triggers a call to the ChatGPT API to generate a recipe.
+ * *  Handles loading states while the recipe is being generated.
+ * *  Displays the created recipe using the RecipeComponent.
+ * *  Offers the option to create additional recipes.
+ * 
+ * Dependencies:
+ * *  axios: For making API requests to the backend. 
+ *  RecipeComponent.jsx:  To display the created recipe.
+ */
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import RecipeComponent from './RecipeComponent'; // To display recipe
@@ -7,7 +23,6 @@ const baseURL = import.meta.env.VITE_BASE_URL;
 const RecipeCreation = ({ token }) => {
     const [isLoading, setIsLoading] = useState(false); 
     const [error, setError] = useState(null);
-    
     const [recipeData, setRecipeData] = useState(null); // Store the created recipe
     const [showForm, setShowForm] = useState(true); // State to control form visibility
 

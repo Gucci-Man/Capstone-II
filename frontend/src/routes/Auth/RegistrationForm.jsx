@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import '../../styles/LoginForm.css';
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 
-const RegistrationForm = ({token, setIsLoggedIn}) => {
+const RegistrationForm = ({ setIsLoggedIn }) => {
     const [formData, setFormData] = useState({
         username:'',
         firstName:'',
@@ -60,12 +61,18 @@ const handleSubmit = async (e) => {
     } catch (err) {
         console.log('Registration Error:', err);
         // TODO: Handle specific errors, e.g., username exists
+
+        if (err.response) {
+            setErrorMessages({general: "Registration failed. Please try again. Username may be taken"})
+        }
     }
 };
 
     return (
         <div>
             <h1>Registration Form</h1>
+            {/* Display general error */}
+            {errorMessages.general && <p className="error">{errorMessages.general}</p>} 
             <form onSubmit={handleSubmit}>
             {errorMessages.username && <p className="error">{errorMessages.username}</p>}
             <div>

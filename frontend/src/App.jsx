@@ -1,3 +1,18 @@
+/**
+ * App.jsx
+ * ------- 
+ * Top-level application component responsible for:
+ * 
+ * *  Managing the initial authentication state (isLoggedIn) based on localStorage.
+ * *  Rendering the NavBar (if a user is logged in).
+ * *  Using React Router to control routing via the RouteList component.
+ *
+ * Dependencies:
+ * *  react-router-dom: For client-side routing.
+ * *  NavBar.jsx: Component for the application's navigation bar.
+ * *  RouteList.jsx: Component responsible for defining the application's routes.
+ */
+
 import './styles/App.css'
 import React, {useState, useEffect} from 'react';
 import { BrowserRouter } from "react-router-dom";

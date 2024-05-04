@@ -1,3 +1,17 @@
+/**
+ * Home.jsx
+ * --------
+ * Acts as the main landing page for authenticated users. Provides the following:
+ *
+ * *  Authentication Guard:  Redirects to the welcome page if the user is not logged in.
+ * *  Welcomes the user by displaying their username.
+ * *  Includes the RecipeCreation component, allowing users to create new recipes.
+ *
+ * Dependencies:
+ * *  react-router-dom (useNavigate): For redirecting if not authenticated.
+ *  RecipeCreation.jsx: Component for handling recipe creation.
+ */
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RecipeCreation from './Recipe/RecipeCreation';
