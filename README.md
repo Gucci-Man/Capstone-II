@@ -1,12 +1,15 @@
 # FoodieFit: A Delicious Journey to Fitness  
 
-FoodieFit is a web application designed to help users manage their health and well-being through a fun and personalized approach to food and fitness. 
+FoodieFit is a web application designed to help users manage their health and well-being through a fun and personalized approach to food and fitness.
 
 ## Created by Adel Ngo
 
 **API**: https://platform.openai.com/docs/overview
 
 **Deployed Link**: https://foodiefit.onrender.com
+
+![Login](Screenshots/Login.png)
+_Login Page_
 
 ## Features
 
@@ -18,43 +21,6 @@ FoodieFit is a web application designed to help users manage their health and we
 * **Responsive Design:** The application adapts to various screen sizes, ensuring a seamless user experience across different devices.
 
 These features were chosen to create a user-friendly platform that empowers individuals to take charge of their health through mindful recipe creation and meal planning. By allowing users to personalize their recipes, FoodieFit caters to a wide range of dietary needs and preferences, making healthy eating more accessible and enjoyable.
-
-![Login](Screenshots/Login.png)
-_Login Page_
-
-## Setup
-
-To get FoodieFit up and running, follow these steps:
-
-### Prerequisites
-
-* Node.js and npm (or yarn) installed on your system.
-* PostgreSQL database set up.
-* An API key from OpenAI 
-* A `.env` file to store sensitive information like the _OpenAI API Key_ and _Bcrypt Encryption Key_.
-
-**To seed database:**
-$ psql < db_setup.sql
-
-### Backend Setup
-
-1. Clone the project repository.
-2. Navigate to the backend directory in your terminal.
-3. Install dependencies: `npm install` 
-4. Set up your environment variables (API keys, database credentials, etc.)
-5. Start the development server: `npm run dev` 
-   OR start the production server: `npm run start`
-
-**To run tests**: `npm run test` 
-
-### Frontend Setup
-
-1. Navigate to the frontend directory in your terminal.
-2. Install dependencies: `npm install`
-3. Start the development server: `npm run dev`
-
-The frontend should typically connect to your running backend 
-server.
 
 ![Recipe Form](Screenshots/Recipe_Form.png)
 _Home page_
