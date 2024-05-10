@@ -23,7 +23,6 @@ const jsonschema = require("jsonschema");
 
 const express = require('express');
 const router = new express.Router();
-const db = require("../db");
 const User = require("../models/userModel");
 const { ensureLoggedIn, ensureCorrectUser } = require("../middleware/auth");
 const userUpdateSchema = require("../schemas/userUpdate.json");

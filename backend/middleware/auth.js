@@ -53,7 +53,6 @@ function ensureLoggedIn(req, res, next) {
 function ensureCorrectUser(req, res, next) {
     try {
         // username from req.user should match with req.params
-        /* console.log(`req.user is ${JSON.stringify(req.user, null, 2)}`); */
         if (req.user.username === req.params.username) {
             return next();
         } else {

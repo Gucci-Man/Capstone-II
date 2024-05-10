@@ -18,10 +18,9 @@ import RecipeCreation from './Recipe/RecipeCreation';
 
 
 // Only logged in users can see this page with token
-const Home = ({token, setToken, setIsLoggedIn}) => {
+const Home = ({ token }) => {
     const navigate = useNavigate();
     const [username, setUsername] = useState(null);
-    /* console.log(`Inside Home: ${token}`) */
 
     useEffect(() => {
         

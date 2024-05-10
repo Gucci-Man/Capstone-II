@@ -1,3 +1,19 @@
+/**
+ * RegistrationForm.jsx
+ * -------------------
+ * Renders a form for new user registration. Includes:
+ * 
+ * *  Form fields for username, first name, last name, email, and password.
+ * *  Basic input validation.
+ * *  Handles form submission and sends a registration request to the backend API.
+ * *  Redirects the user to the home page upon successful registration.
+ * *  Displays error messages if registration fails.
+ *
+ * Dependencies:
+ * *  react-router-dom (useNavigate): Redirects the user after successful registration. 
+ *  axios:  Makes API requests to the backend. 
+ */ 
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';

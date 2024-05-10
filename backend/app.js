@@ -1,7 +1,7 @@
 /**
  * app.js
  * ------
- * Main entry point for [Your Application Name] backend server. This file sets up:
+ * Main entry point for FoodieFit backend server. This file sets up:
  *
  * *  Express server configuration.
  * *  CORS middleware (for cross-origin requests).
@@ -14,10 +14,11 @@
  */
 
 const express = require("express");
-const cors = require("cors");
+const cors = require("cors"); // Middleware for handling cross-origin requests
 const { authenticateJWT } = require("./middleware/auth")
 const { NotFoundError }= require("./expressError")
 
+// Creates an Express application instance
 const app = express();
 
 // allow connections to all routes from any browser
@@ -36,6 +37,7 @@ const userRoutes = require('./routes/userRoutes');
 const authRoutes = require(`./routes/authRoutes`);
 const recipeRoutes = require(`./routes/recipeRoutes`);
 
+// route prefixing
 app.use('/users', userRoutes);
 app.use(`/auth`, authRoutes);
 app.use(`/recipes`, recipeRoutes);
