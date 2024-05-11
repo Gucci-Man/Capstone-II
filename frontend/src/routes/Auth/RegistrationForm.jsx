@@ -51,7 +51,7 @@ const handleChange = (e) => {
 };
 
 const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault();handleSubmit
     const { username } = formData;
 
     // Basic validation (add more robust validation)

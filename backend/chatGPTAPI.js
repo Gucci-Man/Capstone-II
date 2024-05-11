@@ -19,7 +19,7 @@
 const { CHATGPT_KEY } = require("./config");
 const { OpenAI } = require('openai');
 const { BadRequestError }= require("./expressError");
-const openai = new OpenAI({ apiKey: CHATGPT_KEY });
+const openai = new OpenAI({ apiKey: CHATGPT_KEY }); // Initializes an instance of the OpenAI client with API key to make requests to API
 
     /**
      * Retrieve recipe from ChatGPT API -- returns 
