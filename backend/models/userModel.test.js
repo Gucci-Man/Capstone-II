@@ -1,3 +1,16 @@
+/**
+ * userModel.test.js
+ * -----------------
+ * Unit tests for the User model (`userModel.js`).
+ *
+ * Tests the following functionalities:
+ * - User authentication (valid and invalid credentials)
+ * - User registration (successful and duplicate username scenarios)
+ * - Retrieving all users
+ * - Retrieving a specific user by username (and error handling for non-existent users)
+ * - Updating user data (including password changes)
+ * - Deleting users
+ */
 
 const {
     NotFoundError,

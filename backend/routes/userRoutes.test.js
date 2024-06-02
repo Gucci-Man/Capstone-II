@@ -1,3 +1,19 @@
+/**
+ * userRoutes.test.js
+ * ------------------
+ * Integration tests for the user routes in `userRoutes.js`.
+ * 
+ * Tests the following API endpoints:
+ *  - GET /users: Retrieves a list of all users.
+ *  - GET /users/:username: Retrieves details for a specific user.
+ *  - PATCH /users/:username: Updates a user's profile information.
+ *  - DELETE /users/:username: Deletes a user's account.
+ *
+ * Tests verify:
+ *  - Proper functioning of each endpoint for authenticated users.
+ *  - Authorization checks to ensure users can only modify/delete their own accounts.
+ *  - Error handling for unauthorized requests, invalid data, and non-existent users.
+ */
 
 const request = require("supertest");
 

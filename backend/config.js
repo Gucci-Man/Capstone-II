@@ -19,11 +19,12 @@ const CHATGPT_KEY = process.env.OPENAI_API_KEY;
 
 const PORT = +process.env.PORT || 3000;
 
-/* function getDatabaseUri() {
+// For testing
+function getDatabaseUri() {
     return (process.env.NODE_ENV === "test")
         ? "foodie_fit_test"
         : "foodie_fit";
-  } */
+  }
 
 const DB = (process.env.NODE_ENV === "test")
     ? "foodie_fit_test"
@@ -38,5 +39,5 @@ module.exports = {
     BCRYPT_WORK_FACTOR,
     CHATGPT_KEY,
     PORT,
-    /* getDatabaseUri, */
+    getDatabaseUri,
 };
